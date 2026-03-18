@@ -12,7 +12,6 @@ body {
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  padding: 30px 20px;
 }
 
 h1 {
@@ -20,6 +19,7 @@ h1 {
   margin-bottom: 24px;
   font-size: 1.6rem;
   letter-spacing: 2px;
+  padding-top: 30px;
 }
 
 .container {
@@ -172,4 +172,70 @@ h1 {
 
 .btn-download:hover {
   background: #1e8449;
+}
+
+.site-footer {
+  width: 100%;
+  margin-top: 40px;
+  padding: 14px 20px;
+  border-top: 1px solid #243b6b;
+  background: #020338;
+  color: #aaa;
+  display: flex;
+  justify-content: center;
+}
+
+.footer-inner {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 0.8rem;
+}
+
+.footer-text {
+  opacity: 0.9;
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  color: #f0c040;
+  border: 1px solid #f0c040;
+  text-decoration: none;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    transform 0.15s;
+}
+
+.footer-icon-link:hover {
+  background: #f0c040;
+  color: #04045e;
+  transform: translateY(-1px);
+}
+
+.footer-icon-link .icon {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+@media (max-width: 600px) {
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
