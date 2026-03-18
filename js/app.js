@@ -125,8 +125,18 @@ function generateCard() {
 
   // ── Draw text layer ──
   function drawText() {
+    // Name Auto-scale
+    const maxNameWidth = rw - 10; // Max text width
+    let nameFontSize = 46; // Start size
+    const minFontSize = 18; // min size
+
+    ctx.font = `bold ${nameFontSize}px 'Courier New', monospace`;
+    while (ctx.measureText(name.toUpperCase()).width > maxNameWidth && nameFontSize > minFontSize) {
+      nameFontSize -= 1;
+      ctx.font = `bold ${nameFontSize}px 'Courier New', monospace`;
+    }
     ctx.textAlign = "center";
-    ctx.font = "bold 46px 'Courier New', monospace";
+    // ctx.font = "bold 46px 'Courier New', monospace";
     ctx.fillStyle = "#111";
     ctx.fillText(name.toUpperCase(), rx + rw / 2, 56);
 
