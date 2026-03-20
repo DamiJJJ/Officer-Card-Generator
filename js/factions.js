@@ -53,7 +53,7 @@ const FACTIONS = {
   },
 
   lssd: {
-    name: "Los Santos Sheriff's Department",
+    name: "Los Santos County Sheriff's Department",
     short: "LSSD",
     emailDomain: "lssd.gov",
     cardBg: "#f5ecd5",

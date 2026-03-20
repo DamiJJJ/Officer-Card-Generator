@@ -21,6 +21,11 @@ h1 {
   letter-spacing: 2px;
 }
 
+body h1 {
+  width: 30%;
+  text-align: center;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -34,7 +39,7 @@ h1 {
   background: #16213e;
   border-radius: 10px;
   padding: 24px;
-  width: 380px;
+  width: 500px;
 }
 
 .form-panel h2 {
@@ -115,37 +120,19 @@ h1 {
   color: #000;
 }
 
-.btn-generate {
-  width: 100%;
-  padding: 12px;
-  background: #f0c040;
-  color: #000;
-  font-weight: bold;
-  font-size: 1rem;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  margin-top: 16px;
-  letter-spacing: 1px;
-  transition: background 0.2s;
-}
-
-.btn-generate:hover {
-  background: #d4a800;
-}
-
 .preview-panel {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 16px;
+  margin-bottom: 30px;
 }
 
 .preview-panel h2 {
   color: #f0c040;
-  font-size: 1rem;
+  font-size: 1.6rem;
   letter-spacing: 1px;
-  align-self: flex-start;
+  align-self: center;
 }
 
 #cardCanvas {
@@ -175,7 +162,7 @@ h1 {
 
 .site-footer {
   width: 100%;
-  margin-top: 40px;
+  margin-top: auto;
   padding: 14px 20px;
   border-top: 1px solid #243b6b;
   background: #020338;
@@ -249,7 +236,7 @@ h1 {
   cursor: pointer;
   font-size: 0.8rem;
   align-self: center;
-  width: 15%;
+  width: 20%;
   margin-top: 16px;
   text-decoration: none;
   letter-spacing: 1px;
@@ -261,4 +248,116 @@ h1 {
 .btn-back:hover {
   background: #f0c040;
   color: #000;
+}
+
+.faction-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  width: 100%;
+  max-width: 1000px;
+  margin-top: 16px;
+}
+
+.faction-card {
+  background: #16213e;
+  border-radius: 12px;
+  padding: 36px 24px;
+  text-align: center;
+  text-decoration: none;
+  color: #eee;
+  border: 2px solid transparent;
+  transition:
+    border-color 0.2s,
+    transform 0.15s,
+    background 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+}
+
+.faction-card:hover {
+  border-color: #f0c040;
+  background: #1a2a4a;
+  transform: translateY(-4px);
+}
+
+.faction-card .faction-badge {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+.faction-card .faction-name {
+  font-size: 1.3rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.faction-card .faction-desc {
+  font-size: 0.75rem;
+  color: #aaa;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.faction-card .faction-tag {
+  font-size: 0.7rem;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  background: #0f3460;
+  color: #f0c040;
+  border: 1px solid #f0c040;
+}
+
+/* LSPD */
+.faction-lspd {
+  border-color: #2124d1;
+}
+.faction-lspd .faction-name {
+  color: #f0c040;
+}
+
+/* LSSD */
+.faction-lssd {
+  border-color: #be8639;
+}
+.faction-lssd .faction-name {
+  color: #c8860a;
+}
+
+/* Coming soon overlay */
+.faction-card.coming-soon {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.faction-card.coming-soon .faction-tag {
+  background: #333;
+  color: #888;
+  border-color: #555;
+}
+
+.subtitle {
+  color: #aaa;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.faction-badge img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
 }

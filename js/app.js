@@ -84,6 +84,8 @@ function randomizePay() {
   document.getElementById("payOther").value = fmt(other);
   document.getElementById("payHealth").value = fmt(health);
   document.getElementById("payRetirement").value = "unknown";
+
+  generateCard();
 }
 
 // ── Card generator ────────────────────────────────────────────────────────────
@@ -289,6 +291,17 @@ function downloadCard() {
   a.click();
 }
 
+function debounce(fn, delay = 300) {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn(...args), delay);
+  };
+}
+
 // ── Init ──────────────────────────────────────────────────────────────────────
 populateSelects();
 randomizePay();
+generateCard();
+
+document.querySelector(".form-panel").addEventListener("input", debounce(generateCard));
