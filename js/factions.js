@@ -49,6 +49,8 @@ const FACTIONS = {
       "Gang and Narcotics Division",
       "Internal Affairs Division",
       "Major Crimes Division",
+      "Robbery-Homicide Division",
+      "Force Investigation Division",
     ],
   },
 
