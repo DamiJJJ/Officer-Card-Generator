@@ -45,18 +45,21 @@ body h3 {
 
 .container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 30px;
-  width: 100%;
-  max-width: 1000px;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 28px;
+  width: 80%;
+  max-width: 1400px;
+  margin: 0 auto 30px;
 }
 
 .form-panel {
+  flex: 0 0 480px;
   background: #16213e;
   border-radius: 10px;
   padding: 24px;
-  width: 500px;
+  border: 1px solid #2a2a4a;
+  width: auto;
 }
 
 .form-panel h2 {
@@ -138,11 +141,16 @@ body h3 {
 }
 
 .preview-panel {
+  flex: 1;
+  background: #16213e;
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid #2a2a4a;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 16px;
-  margin-bottom: 30px;
+  margin-bottom: 0;
 }
 
 .preview-panel h2 {
@@ -237,6 +245,19 @@ body h3 {
   .footer-inner {
     flex-direction: column;
     align-items: flex-start;
+  }
+}
+
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+    width: 95%;
+  }
+
+  .form-panel {
+    flex: none;
+    width: 100%;
   }
 }
 
@@ -361,21 +382,6 @@ body h3 {
 }
 
 /* Firearm discharge investigation - generator styles */
-
-.container-report {
-  display: flex;
-  gap: 28px;
-  max-width: 1400px;
-  margin: 0 auto 10px;
-  align-items: flex-start;
-}
-.form-panel-report {
-  flex: 0 0 420px;
-  background: #16213e;
-  border-radius: 12px;
-  padding: 24px;
-  border: 1px solid #2a2a4a;
-}
 .form-panel-report h3 {
   font-size: 15px;
   color: #f0c040;
@@ -511,17 +517,6 @@ body h3 {
   background: #1a4a80;
 }
 
-.preview-panel {
-  flex: 1;
-  background: #16213e;
-  border-radius: 12px;
-  padding: 24px;
-  border: 1px solid #2a2a4a;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-}
 .preview-panel h3 {
   font-size: 15px;
   color: #f0c040;
@@ -539,4 +534,50 @@ body h3 {
   height: auto;
   display: block;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* Faction switcher styles */
+
+.faction-switcher {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.faction-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: #16213e;
+  border: 2px solid #334;
+  border-radius: 10px;
+  padding: 10px 18px;
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+  color: #aaa;
+  font-size: 0.75rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.faction-btn img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.faction-btn:hover {
+  border-color: #f0c040;
+  color: #f0c040;
+}
+
+.faction-btn.active {
+  border-color: #f0c040;
+  background: #1a2a4a;
+  color: #f0c040;
 }

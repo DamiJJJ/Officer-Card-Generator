@@ -1,3 +1,22 @@
+"use strict";
+
+// ── Active faction ────────────────────────────────────────────────────────────
+const urlFaction = new URLSearchParams(window.location.search).get("faction");
+let REPORT_FACTION = urlFaction && FACTIONS[urlFaction] ? urlFaction : "lspd";
+
+function switchReportFaction(key) {
+  REPORT_FACTION = key;
+  document.querySelectorAll(".faction-btn").forEach((btn) => {
+    btn.classList.toggle("active", btn.dataset.faction === key);
+  });
+  refreshPreview();
+}
+
+function getActiveFaction() {
+  return FACTIONS[REPORT_FACTION];
+}
+
+// ── Officer rows counters ─────────────────────────────────────────────────────
 let involvedCount = 0,
   witnessingCount = 0,
   civilianCount = 0;
@@ -16,14 +35,14 @@ function makeYnSelects(prefix) {
     `<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;">` +
     YN_FIELDS.map(
       (f) => `
-          <div class="form-group" style="flex:1;min-width:70px;">
-            <label>${f.label}</label>
-            <select id="${prefix}_${f.id}">
-              <option value="-">-</option>
-              <option value="Y">Y</option>
-              <option value="N">N</option>
-            </select>
-          </div>`,
+      <div class="form-group" style="flex:1;min-width:70px;">
+        <label>${f.label}</label>
+        <select id="${prefix}_${f.id}">
+          <option value="-">-</option>
+          <option value="Y">Y</option>
+          <option value="N">N</option>
+        </select>
+      </div>`,
     ).join("") +
     `</div>`
   );
@@ -39,27 +58,27 @@ function addOfficerRow(type) {
   div.dataset.type = type;
   div.dataset.idx = idx;
   div.innerHTML = `
-        <div class="row-title">Officer #${idx}</div>
-        <button class="btn-remove-row" onclick="this.parentElement.remove();refreshPreview()">✕</button>
-        <div class="form-group"><label>Last, First, Middle Initial</label><input type="text" id="${prefix}_name" placeholder="Callahan, Michael R."></div>
-        <div class="two-col">
-          <div class="form-group"><label>Serial No.</label><input type="text" id="${prefix}_serial" placeholder="50286"></div>
-          <div class="form-group"><label>Area/Division</label><input type="text" id="${prefix}_division" placeholder="Patrol Div."></div>
-        </div>
-        <div class="three-col">
-          <div class="form-group">
-            <label>Sex</label>
-            <select id="${prefix}_sex"><option value="-">-</option><option value="M" selected>M</option><option value="F">F</option></select>
-          </div>
-          <div class="form-group"><label>Desc.</label><input type="text" id="${prefix}_desc" placeholder="-"></div>
-          <div class="form-group"><label>Ht.</label><input type="text" id="${prefix}_ht" placeholder='5&#39;9"'></div>
-        </div>
-        <div class="two-col">
-          <div class="form-group"><label>Wt.</label><input type="text" id="${prefix}_wt" placeholder="195lbs"></div>
-          <div class="form-group"><label>Age</label><input type="text" id="${prefix}_age" placeholder="35"></div>
-        </div>
-        ${makeYnSelects(prefix)}
-      `;
+    <div class="row-title">Officer #${idx}</div>
+    <button class="btn-remove-row" onclick="this.parentElement.remove();refreshPreview()">✕</button>
+    <div class="form-group"><label>Last, First, Middle Initial</label><input type="text" id="${prefix}_name" placeholder="Callahan, Michael R."></div>
+    <div class="two-col">
+      <div class="form-group"><label>Serial No.</label><input type="text" id="${prefix}_serial" placeholder="50286"></div>
+      <div class="form-group"><label>Area/Division</label><input type="text" id="${prefix}_division" placeholder="Patrol Div."></div>
+    </div>
+    <div class="three-col">
+      <div class="form-group">
+        <label>Sex</label>
+        <select id="${prefix}_sex"><option value="-">-</option><option value="M" selected>M</option><option value="F">F</option></select>
+      </div>
+      <div class="form-group"><label>Desc.</label><input type="text" id="${prefix}_desc" placeholder="-"></div>
+      <div class="form-group"><label>Ht.</label><input type="text" id="${prefix}_ht" placeholder='5&#39;9"'></div>
+    </div>
+    <div class="two-col">
+      <div class="form-group"><label>Wt.</label><input type="text" id="${prefix}_wt" placeholder="195lbs"></div>
+      <div class="form-group"><label>Age</label><input type="text" id="${prefix}_age" placeholder="35"></div>
+    </div>
+    ${makeYnSelects(prefix)}
+  `;
   container.appendChild(div);
   div.querySelectorAll("input,select").forEach((el) => {
     el.addEventListener("input", refreshPreview);
@@ -78,42 +97,42 @@ function addCivilianRow() {
   div.dataset.type = "civilian";
   div.dataset.idx = idx;
   div.innerHTML = `
-        <div class="row-title">Civilian #${idx}</div>
-        <button class="btn-remove-row" onclick="this.parentElement.remove();refreshPreview()">✕</button>
-        <div class="form-group"><label>Last, First, Middle Initial</label><input type="text" id="${prefix}_name" placeholder="Doe, John F."></div>
-        <div class="three-col">
-          <div class="form-group">
-            <label>Sex</label>
-            <select id="${prefix}_sex"><option value="-">-</option><option value="M">M</option><option value="F">F</option></select>
-          </div>
-          <div class="form-group"><label>Desc.</label><input type="text" id="${prefix}_desc" placeholder="-"></div>
-          <div class="form-group"><label>Ht.</label><input type="text" id="${prefix}_ht" placeholder='5&#39;9"'></div>
-        </div>
-        <div class="three-col">
-          <div class="form-group"><label>Wt.</label><input type="text" id="${prefix}_wt" placeholder="195lbs"></div>
-          <div class="form-group"><label>Age</label><input type="text" id="${prefix}_age" placeholder="27"></div>
-          <div class="form-group"><label>DOB</label><input type="date" id="${prefix}_dob"></div>
-        </div>
-        <div class="form-group"><label>Driver Lic. No. / Other ID</label><input type="text" id="${prefix}_dl" placeholder="-"></div>
-        <div class="form-group"><label>Occupation</label><input type="text" id="${prefix}_occupation" placeholder="-"></div>
-        <div class="two-col">
-          <div class="form-group"><label>Address R-</label><input type="text" id="${prefix}_addr_r" placeholder="-"></div>
-          <div class="form-group"><label>Phone R-</label><input type="text" id="${prefix}_phone_r" placeholder="-"></div>
-        </div>
-        <div class="two-col">
-          <div class="form-group"><label>E-Mail</label><input type="text" id="${prefix}_email" placeholder="-"></div>
-          <div class="form-group"><label>Address B-</label><input type="text" id="${prefix}_addr_b" placeholder="-"></div>
-        </div>
-        <div class="two-col">
-          <div class="form-group"><label>Phone B-</label><input type="text" id="${prefix}_phone_b" placeholder="-"></div>
-          <div class="form-group"><label>Cell Phone</label><input type="text" id="${prefix}_cell" placeholder="-"></div>
-        </div>
-        <div class="form-group"><label>Foreign Language Spoken</label><input type="text" id="${prefix}_lang" placeholder="-"></div>
-        <div class="form-group">
-          <label>Name/Serial No. of Supervisor &amp; Date/Time/Location</label>
-          <input type="text" id="${prefix}_supervisor" placeholder="-">
-        </div>
-      `;
+    <div class="row-title">Civilian #${idx}</div>
+    <button class="btn-remove-row" onclick="this.parentElement.remove();refreshPreview()">✕</button>
+    <div class="form-group"><label>Last, First, Middle Initial</label><input type="text" id="${prefix}_name" placeholder="Doe, John F."></div>
+    <div class="three-col">
+      <div class="form-group">
+        <label>Sex</label>
+        <select id="${prefix}_sex"><option value="-">-</option><option value="M">M</option><option value="F">F</option></select>
+      </div>
+      <div class="form-group"><label>Desc.</label><input type="text" id="${prefix}_desc" placeholder="-"></div>
+      <div class="form-group"><label>Ht.</label><input type="text" id="${prefix}_ht" placeholder='5&#39;9"'></div>
+    </div>
+    <div class="three-col">
+      <div class="form-group"><label>Wt.</label><input type="text" id="${prefix}_wt" placeholder="195lbs"></div>
+      <div class="form-group"><label>Age</label><input type="text" id="${prefix}_age" placeholder="27"></div>
+      <div class="form-group"><label>DOB</label><input type="date" id="${prefix}_dob"></div>
+    </div>
+    <div class="form-group"><label>Driver Lic. No. / Other ID</label><input type="text" id="${prefix}_dl" placeholder="-"></div>
+    <div class="form-group"><label>Occupation</label><input type="text" id="${prefix}_occupation" placeholder="-"></div>
+    <div class="two-col">
+      <div class="form-group"><label>Address R-</label><input type="text" id="${prefix}_addr_r" placeholder="-"></div>
+      <div class="form-group"><label>Phone R-</label><input type="text" id="${prefix}_phone_r" placeholder="-"></div>
+    </div>
+    <div class="two-col">
+      <div class="form-group"><label>E-Mail</label><input type="text" id="${prefix}_email" placeholder="-"></div>
+      <div class="form-group"><label>Address B-</label><input type="text" id="${prefix}_addr_b" placeholder="-"></div>
+    </div>
+    <div class="two-col">
+      <div class="form-group"><label>Phone B-</label><input type="text" id="${prefix}_phone_b" placeholder="-"></div>
+      <div class="form-group"><label>Cell Phone</label><input type="text" id="${prefix}_cell" placeholder="-"></div>
+    </div>
+    <div class="form-group"><label>Foreign Language Spoken</label><input type="text" id="${prefix}_lang" placeholder="-"></div>
+    <div class="form-group">
+      <label>Name/Serial No. of Supervisor &amp; Date/Time/Location</label>
+      <input type="text" id="${prefix}_supervisor" placeholder="-">
+    </div>
+  `;
   container.appendChild(div);
   div.querySelectorAll("input,select").forEach((el) => {
     el.addEventListener("input", refreshPreview);
@@ -122,7 +141,7 @@ function addCivilianRow() {
   refreshPreview();
 }
 
-// ── Data helpers ──
+// ── Data helpers ──────────────────────────────────────────────────────────────
 function getVal(id) {
   const el = document.getElementById(id);
   return el ? el.value.trim() || "-" : "-";
@@ -182,7 +201,7 @@ function fmtDatetime(raw) {
   return t ? `${d} ${t}` : d || "-";
 }
 
-// ── Canvas constants ──
+// ── Canvas constants ──────────────────────────────────────────────────────────
 const MARGIN = 30;
 const DOC_W = 580;
 const BODY_W = DOC_W - MARGIN * 2;
@@ -204,8 +223,9 @@ const OFF_COLS = [
   { label: "Light Duty (Y/N)", key: "light_duty", w: 0.04, yn: true },
 ];
 
-// ── Drawing ──
+// ── Drawing ───────────────────────────────────────────────────────────────────
 function drawForm() {
+  const faction = getActiveFaction();
   const involvedRows = collectOfficerRows("involved");
   const witnessingRows = collectOfficerRows("witnessing");
   const civilianRows = collectCivilianRows();
@@ -214,39 +234,35 @@ function drawForm() {
   const effWitnessing = Math.max(3, witnessingRows.length);
   const effCivilians = Math.max(2, civilianRows.length);
 
-  // Heights:
   const officerSectionH = (n) => 16 + 24 + n * 20 + 6;
   const civilianBlockH = 22 + 18 + 18 + 18 + 5;
-
   const A4_HEIGHT = Math.round(DOC_W * 1.4142);
-
   const contentH = 62 + 16 + 26 + 26 + 26 + officerSectionH(effInvolved) + officerSectionH(effWitnessing) + 16 + effCivilians * civilianBlockH + 30;
 
   const canvasH = Math.max(A4_HEIGHT, contentH);
-
   const canvas = document.getElementById("docCanvas");
   canvas.width = DOC_W;
   canvas.height = canvasH;
   const ctx = canvas.getContext("2d");
+
   ctx.fillStyle = "#fff";
   ctx.fillRect(0, 0, DOC_W, canvasH);
-
   ctx.lineWidth = 1;
   ctx.strokeStyle = "#000";
 
   let y = MARGIN;
 
-  // Header
+  // ── Header — faction name from factions.js ────────────────────────────────
   ctx.fillStyle = "#000";
   ctx.textAlign = "center";
   ctx.font = "bold 10px Arial";
-  ctx.fillText("Los Santos Police Department", DOC_W / 2, y);
+  ctx.fillText(faction.name.toUpperCase(), DOC_W / 2, y);
   y += 14;
   ctx.font = "bold 13px Arial";
   ctx.fillText("OFFICER-INVOLVED FIREARM DISCHARGE INVESTIGATION", DOC_W / 2, y);
   y += 18;
 
-  // Top checkboxes
+  // ── Top checkboxes ────────────────────────────────────────────────────────
   ctx.font = "8.5px Arial";
   ctx.textAlign = "left";
   [
@@ -283,6 +299,7 @@ function drawForm() {
     y,
     26,
   );
+
   y = gridRow(
     ctx,
     [
@@ -320,6 +337,7 @@ function drawForm() {
   ctx.fillText("Page 1 of 1", DOC_W - MARGIN, canvasH - 12);
 }
 
+// ── Helpers ───────────────────────────────────────────────────────────────────
 function sectionHeader(ctx, text, y) {
   ctx.fillStyle = "#ddd";
   ctx.fillRect(MARGIN, y, BODY_W, 16);
@@ -363,7 +381,6 @@ function clip(ctx, text, maxW) {
   return text + "…";
 }
 
-// Converts fractional widths to integer pixel widths that sum exactly to BODY_W
 function calcWidths(fractions) {
   const widths = fractions.map((f) => Math.round(BODY_W * f));
   const diff = BODY_W - widths.reduce((a, b) => a + b, 0);
@@ -414,7 +431,6 @@ function drawOffRow(ctx, data, y) {
 }
 
 function officerSection(ctx, title, rows, y) {
-  // Title bar
   ctx.fillStyle = "#f5f5f5";
   ctx.fillRect(MARGIN, y, BODY_W, 16);
   ctx.strokeStyle = "#000";
@@ -434,7 +450,6 @@ function officerSection(ctx, title, rows, y) {
 }
 
 function civilianSection(ctx, rows, y) {
-  // Title bar
   ctx.fillStyle = "#f5f5f5";
   ctx.fillRect(MARGIN, y, BODY_W, 16);
   ctx.strokeStyle = "#000";
@@ -454,7 +469,6 @@ function civilianSection(ctx, rows, y) {
 
 function drawCivBlock(ctx, d, y) {
   const g = (k) => d[k] || "-";
-
   y = gridRow(
     ctx,
     [
@@ -524,6 +538,7 @@ function wrapText(ctx, text, x, y, maxW, lineH) {
   if (line) ctx.fillText(line, x, curY);
 }
 
+// ── Preview & Download ────────────────────────────────────────────────────────
 function refreshPreview() {
   drawForm();
 }
@@ -536,10 +551,17 @@ function downloadPng() {
   a.click();
 }
 
+// ── Init ──────────────────────────────────────────────────────────────────────
 document.querySelectorAll("input,select").forEach((el) => {
   el.addEventListener("input", refreshPreview);
   el.addEventListener("change", refreshPreview);
 });
 
-// Pre-populate default empty row
+// Set active button on load if faction came from URL
+if (urlFaction && FACTIONS[urlFaction]) {
+  document.querySelectorAll(".faction-btn").forEach((btn) => {
+    btn.classList.toggle("active", btn.dataset.faction === urlFaction);
+  });
+}
+
 addOfficerRow("involved");
