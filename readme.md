@@ -1,26 +1,27 @@
 # Guma-LEA-Generator
 
-A web app for generating fictional Law Enforcement Agency documents — inspired by real LAPD/LSSD report formats used in FiveM roleplay.
+A web app for generating fictional Law Enforcement Agency documents and officer cards — inspired by real LAPD/LSSD formats used in FiveM roleplay servers.
 Built with plain HTML, CSS and JavaScript. No frameworks, no dependencies.
 
 ## Live Demo
 
-[View on GitHub Pages](https://damijjj.github.io/Guma-LEA-Generator/)
+[🔗 View on GitHub Pages](https://damijjj.github.io/Guma-LEA-Generator/)
 
 ## Available Generators
 
 | Generator                       | File                     | Description                                                        |
 | ------------------------------- | ------------------------ | ------------------------------------------------------------------ |
-| LSPD Officer Card               | `lspd.html`              | Los Santos Police Department officer profile card                  |
-| LSSD Officer Card               | `lssd.html`              | Los Santos County Sheriff's Department officer profile card        |
+| Officer Card                    | `generator.html`         | LSPD / LSSD officer profile card with faction switcher             |
 | Firearm Discharge Investigation | `firearm-discharge.html` | LAPD-style Officer-Involved Firearm Discharge Investigation report |
 
 ## Features
 
-### Officer Card (LSPD / LSSD)
+### Officer Card Generator
 
-- Fill in officer/deputy details (name, rank, division, badge number, etc.)
+- Faction switcher — LSPD / LSSD (BCSO & SAHP planned)
+- Fill in officer details: name, rank, division, serial & badge number
 - Upload a photo — auto-cropped to fit the card
+- Ethnicity, gender, age, year hired, height & weight fields
 - Randomize pay based on rank
 - Live preview rendered on HTML Canvas
 - Download the card as a PNG file
@@ -28,18 +29,17 @@ Built with plain HTML, CSS and JavaScript. No frameworks, no dependencies.
 ### Firearm Discharge Investigation
 
 - Incident type checkboxes (Tactical, Non-Tactical, Animal Shooting, Warning Shot)
-- Section I — General Information (FID No., DR No., date, time, location, RD, reporting officer)
-- Dynamic officer rows — add/remove Involved Officers and Witnessing Officers
-- Dynamic civilian witness rows with full contact details
-- Y/N fields rendered as dropdown selects (In Uniform, Vest, On Duty, Injured, IOD, Light Duty)
+- Section I — General Information (FID No., DR No., date, time, location, RD)
 - Day of Week dropdown, datetime-local picker for report date/time
-- Live preview — form updates reflected instantly on canvas
-- Canvas output proportioned to A4 size
+- Dynamic rows — add/remove Involved Officers and Witnessing Officers
+- Dynamic civilian witness rows with full contact details
+- Y/N fields as dropdowns (In Uniform, Vest, On Duty, Injured, IOD, Light Duty)
+- Live preview updated instantly on canvas — proportioned to A4
 - Download the report as a PNG file
 
 ## Usage
 
-No build tools required. Open `index.html` in a browser or deploy to any static hosting (GitHub Pages, Netlify, etc.).
+No build tools required. Open `index.html` in a browser or deploy to any static hosting.
 
 ## Tech Stack
 
