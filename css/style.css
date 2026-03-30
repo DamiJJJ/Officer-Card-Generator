@@ -172,7 +172,7 @@ body h3 {
 
 .btn-download {
   background: linear-gradient(135deg, #f0c040, #c8960c);
-  color: #1a1a2e;
+  color: #fff;
   border: none;
   padding: 10px 32px;
   border-radius: 8px;
@@ -184,6 +184,34 @@ body h3 {
 }
 .btn-download:hover {
   opacity: 0.85;
+}
+
+.btn-support {
+  background: linear-gradient(135deg, #6cdd5e, #4ab034);
+  color: #fff;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-support:hover {
+  opacity: 0.85;
+}
+
+.btn-row {
+  display: flex;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.btn-row .btn-download,
+.btn-row .btn-support {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  white-space: nowrap;
+  gap: 6px;
 }
 
 .site-footer {
