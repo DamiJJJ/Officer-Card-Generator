@@ -1,9 +1,270 @@
+// HEADER
+class GumaHeader extends HTMLElement {
+  connectedCallback() {
+    const current = window.location.pathname.split("/").pop() || "index.html";
+
+    const isCard = ["officer_generator.html", "firefighter_generator.html"].includes(current);
+    const isReport = ["firearm_discharge.html", "traffic_collision_report.html"].includes(current);
+    const isHome = current === "index.html" || current === "";
+
+    const navLinkBase = "px-3 py-2 rounded-lg text-sm font-semibold uppercase tracking-[0.12em] transition";
+    const navActive = "text-guma-gold bg-guma-gold/10";
+    const navInactive = "text-guma-muted hover:text-guma-text hover:bg-white/5";
+
+    const dropLinkBase = "flex items-center gap-2 px-4 py-3 text-sm transition hover:bg-guma-panel-2 hover:text-guma-gold";
+    const dropActive = "text-guma-gold bg-guma-panel-2";
+    const dropInactive = "text-guma-text";
+
+    this.innerHTML = `
+      <header class="sticky top-0 z-30 border-b border-white/10 bg-[#04045e]/85 backdrop-blur-md">
+
+        <!-- ── Main bar ── -->
+        <div class="mx-auto flex w-full max-w-[1400px] items-center justify-between gap-4 px-4 py-2.5 sm:px-6 lg:px-8">
+
+          <!-- Logo w jasnym tle -->
+          <a href="index.html"
+             class="flex-shrink-0 flex items-center rounded-xl bg-white/90 px-3 py-1.5 shadow-md transition hover:bg-white hover:-translate-y-px">
+            <img src="assets/logo.png" alt="GUMA Tools" class="h-8 w-auto" />
+          </a>
+
+          <!-- Desktop nav -->
+          <nav class="hidden md:flex items-center gap-0.5">
+
+            <a href="index.html"
+               class="${navLinkBase} ${isHome ? navActive : navInactive}">
+              Home
+            </a>
+
+            <!-- Card Generators dropdown -->
+            <div class="relative" id="gumaCardsDropdown">
+              <button id="gumaCardsBtn"
+                class="flex items-center gap-1.5 ${navLinkBase} ${isCard ? navActive : navInactive}"
+                aria-haspopup="true" aria-expanded="false">
+                Card Generators
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2.5"
+                     stroke-linecap="round" stroke-linejoin="round"
+                     class="transition-transform duration-200" id="gumaCardsChevron">
+                  <polyline points="6 9 12 15 18 9"/>
+                </svg>
+              </button>
+              <div id="gumaCardsMenu"
+                   class="hidden absolute top-full left-0 mt-2 min-w-[230px] rounded-xl border border-guma-border bg-guma-panel shadow-panel overflow-hidden z-50">
+                <a href="officer_generator.html"
+                   class="${dropLinkBase} ${current === "officer_generator.html" ? dropActive : dropInactive}">
+                  <img src="assets/policeman.png" class="h-5 w-5 object-contain opacity-80" alt="" />
+                  Officer Card Generator
+                </a>
+                <a href="firefighter_generator.html"
+                   class="${dropLinkBase} border-t border-guma-border ${current === "firefighter_generator.html" ? dropActive : dropInactive}">
+                  <img src="assets/firefighter.png" class="h-5 w-5 object-contain opacity-80" alt="" />
+                  Firefighter Card Generator
+                </a>
+              </div>
+            </div>
+
+            <!-- Report Generators dropdown -->
+            <div class="relative" id="gumaReportsDropdown">
+              <button id="gumaReportsBtn"
+                class="flex items-center gap-1.5 ${navLinkBase} ${isReport ? navActive : navInactive}"
+                aria-haspopup="true" aria-expanded="false">
+                Report Generators
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2.5"
+                     stroke-linecap="round" stroke-linejoin="round"
+                     class="transition-transform duration-200" id="gumaReportsChevron">
+                  <polyline points="6 9 12 15 18 9"/>
+                </svg>
+              </button>
+              <div id="gumaReportsMenu"
+                   class="hidden absolute top-full left-0 mt-2 min-w-[240px] rounded-xl border border-guma-border bg-guma-panel shadow-panel overflow-hidden z-50">
+                <a href="firearm_discharge.html"
+                   class="${dropLinkBase} ${current === "firearm_discharge.html" ? dropActive : dropInactive}">
+                  <img src="assets/firearm_dis_192.png" class="h-5 w-5 object-contain opacity-80" alt="" />
+                  Firearm Discharge Report
+                </a>
+                <a href="traffic_collision_report.html"
+                   class="${dropLinkBase} border-t border-guma-border ${current === "traffic_collision_report.html" ? dropActive : dropInactive}">
+                  <img src="assets/traffic_col_192.png" class="h-5 w-5 object-contain opacity-80" alt="" />
+                  Traffic Collision Report
+                </a>
+              </div>
+            </div>
+
+            <!-- About (coming soon) -->
+            <span class="${navLinkBase} opacity-35 cursor-not-allowed text-guma-muted select-none"
+                  title="Coming soon">
+              About
+            </span>
+
+          </nav>
+
+          <!-- Right side -->
+          <div class="flex items-center gap-3">
+
+            <!-- Support button -->
+            <a href="https://tipply.pl/@dami" target="_blank" rel="noopener noreferrer"
+               class="hidden sm:inline-flex items-center gap-2 flex-shrink-0 rounded-xl px-4 py-2 text-sm font-black tracking-wide no-underline transition-all duration-200 hover:-translate-y-px hover:brightness-110"
+               style="background: linear-gradient(135deg, #ffe066 0%, #f0c040 50%, #c8960c 100%); color: #1a1000; box-shadow: 0 0 18px rgba(240,192,64,0.35), 0 2px 8px rgba(0,0,0,0.3);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                   fill="currentColor" stroke="none">
+                <path d="M12 21.593c-.525-.47-10.58-9.06-10.58-13.777 0-3.624 2.955-6.566 6.58-6.566 1.73 0 3.39.676 4.62 1.899L12 3.093l-.62.056C12.621 1.897 14.276 1.25 16 1.25c3.625 0 6.58 2.942 6.58 6.566 0 4.717-10.055 13.307-10.58 13.777z"/>
+              </svg>
+              Support project
+            </a>
+
+            <!-- Hamburger (mobile only) -->
+            <button id="gumaHamburger"
+              class="md:hidden inline-flex items-center justify-center h-9 w-9 rounded-lg border border-guma-border text-guma-muted hover:border-guma-gold hover:text-guma-gold transition"
+              aria-label="Toggle menu" aria-expanded="false">
+              <svg id="gumaHamburgerIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                   viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="6"  x2="21" y2="6"/>
+                <line x1="3" y1="12" x2="21" y2="12"/>
+                <line x1="3" y1="18" x2="21" y2="18"/>
+              </svg>
+              <svg id="gumaCloseIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                   viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                   class="hidden">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </button>
+
+          </div>
+        </div>
+
+        <!-- ── Mobile menu ── -->
+        <div id="gumaMobileMenu" class="hidden md:hidden border-t border-white/10 bg-[#04045e]/95">
+          <nav class="mx-auto max-w-[1400px] flex flex-col px-4 py-3 gap-0.5">
+
+            <a href="index.html"
+               class="px-3 py-2.5 rounded-lg text-sm font-semibold uppercase tracking-[0.12em] transition
+                      ${isHome ? "text-guma-gold bg-guma-gold/10" : "text-guma-muted hover:text-guma-text hover:bg-white/5"}">
+              Home
+            </a>
+
+            <p class="px-3 pt-3 pb-1 text-[10px] font-bold uppercase tracking-[0.18em] text-guma-muted/50">
+              Card Generators
+            </p>
+            <a href="officer_generator.html"
+               class="flex items-center gap-2.5 px-4 py-2.5 rounded-lg text-sm transition
+                      ${current === "officer_generator.html" ? "text-guma-gold bg-guma-gold/10" : "text-guma-muted hover:text-guma-text hover:bg-white/5"}">
+              <img src="assets/policeman.png" class="h-5 w-5 object-contain opacity-70" alt="" />
+              Officer Card Generator
+            </a>
+            <a href="firefighter_generator.html"
+               class="flex items-center gap-2.5 px-4 py-2.5 rounded-lg text-sm transition
+                      ${current === "firefighter_generator.html" ? "text-guma-gold bg-guma-gold/10" : "text-guma-muted hover:text-guma-text hover:bg-white/5"}">
+              <img src="assets/firefighter.png" class="h-5 w-5 object-contain opacity-70" alt="" />
+              Firefighter Card Generator
+            </a>
+
+            <p class="px-3 pt-3 pb-1 text-[10px] font-bold uppercase tracking-[0.18em] text-guma-muted/50">
+              Report Generators
+            </p>
+            <a href="firearm_discharge.html"
+               class="flex items-center gap-2.5 px-4 py-2.5 rounded-lg text-sm transition
+                      ${current === "firearm_discharge.html" ? "text-guma-gold bg-guma-gold/10" : "text-guma-muted hover:text-guma-text hover:bg-white/5"}">
+              <img src="assets/firearm_dis_192.png" class="h-5 w-5 object-contain opacity-70" alt="" />
+              Firearm Discharge Report
+            </a>
+            <a href="traffic_collision_report.html"
+               class="flex items-center gap-2.5 px-4 py-2.5 rounded-lg text-sm transition
+                      ${current === "traffic_collision_report.html" ? "text-guma-gold bg-guma-gold/10" : "text-guma-muted hover:text-guma-text hover:bg-white/5"}">
+              <img src="assets/traffic_col_192.png" class="h-5 w-5 object-contain opacity-70" alt="" />
+              Traffic Collision Report
+            </a>
+
+            <!-- About (coming soon) mobile -->
+            <p class="px-3 pt-3 pb-1 text-[10px] font-bold uppercase tracking-[0.18em] text-guma-muted/50">
+              About
+            </p>
+            <span class="flex items-center gap-2.5 px-4 py-2.5 rounded-lg text-sm opacity-35 cursor-not-allowed text-guma-muted select-none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2"
+                   stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+              </svg>
+              About (coming soon)
+            </span>
+
+            <!-- Support button mobile -->
+            <div class="pt-3 pb-1">
+              <a href="https://tipply.pl/@dami" target="_blank" rel="noopener noreferrer"
+                 class="inline-flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-black tracking-wide no-underline transition-all hover:brightness-110"
+                 style="background: linear-gradient(135deg, #ffe066 0%, #f0c040 50%, #c8960c 100%); color: #1a1000; box-shadow: 0 0 18px rgba(240,192,64,0.3), 0 2px 8px rgba(0,0,0,0.3);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+                     fill="currentColor" stroke="none">
+                  <path d="M12 21.593c-.525-.47-10.58-9.06-10.58-13.777 0-3.624 2.955-6.566 6.58-6.566 1.73 0 3.39.676 4.62 1.899L12 3.093l-.62.056C12.621 1.897 14.276 1.25 16 1.25c3.625 0 6.58 2.942 6.58 6.566 0 4.717-10.055 13.307-10.58 13.777z"/>
+                </svg>
+                Support project
+              </a>
+            </div>
+
+          </nav>
+        </div>
+
+      </header>
+    `;
+
+    // ── Dropdown logic ──
+    const setupDropdown = (btnId, menuId, chevronId) => {
+      const btn = this.querySelector(`#${btnId}`);
+      const menu = this.querySelector(`#${menuId}`);
+      const chevron = this.querySelector(`#${chevronId}`);
+      if (!btn || !menu) return;
+
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const isOpen = !menu.classList.contains("hidden");
+        this.querySelectorAll('[id$="Menu"]:not(#gumaMobileMenu)').forEach((m) => m.classList.add("hidden"));
+        this.querySelectorAll('[id$="Chevron"]').forEach((c) => (c.style.transform = ""));
+        if (!isOpen) {
+          menu.classList.remove("hidden");
+          if (chevron) chevron.style.transform = "rotate(180deg)";
+          btn.setAttribute("aria-expanded", "true");
+        } else {
+          btn.setAttribute("aria-expanded", "false");
+        }
+      });
+    };
+
+    setupDropdown("gumaCardsBtn", "gumaCardsMenu", "gumaCardsChevron");
+    setupDropdown("gumaReportsBtn", "gumaReportsMenu", "gumaReportsChevron");
+
+    document.addEventListener("click", () => {
+      this.querySelectorAll('[id$="Menu"]:not(#gumaMobileMenu)').forEach((m) => m.classList.add("hidden"));
+      this.querySelectorAll('[id$="Chevron"]').forEach((c) => (c.style.transform = ""));
+    });
+
+    // ── Mobile menu toggle ──
+    const hamburger = this.querySelector("#gumaHamburger");
+    const mobileMenu = this.querySelector("#gumaMobileMenu");
+    const hamburgerIcon = this.querySelector("#gumaHamburgerIcon");
+    const closeIcon = this.querySelector("#gumaCloseIcon");
+
+    hamburger?.addEventListener("click", () => {
+      const isOpen = !mobileMenu.classList.contains("hidden");
+      mobileMenu.classList.toggle("hidden");
+      hamburgerIcon.classList.toggle("hidden", !isOpen);
+      closeIcon.classList.toggle("hidden", isOpen);
+      hamburger.setAttribute("aria-expanded", String(!isOpen));
+    });
+  }
+}
+
+customElements.define("guma-header", GumaHeader);
+
+// FOOTER
 class GumaFooter extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
       <footer class="mt-auto w-full border-t border-guma-border bg-guma-footer">
         <div class="mx-auto flex w-full max-w-[1400px] flex-col items-start justify-between gap-4 px-4 py-4 text-sm text-zinc-400 sm:flex-row sm:items-center">
-          <span class="text-xs sm:text-sm">GUMA Tools v1.4 &copy; Dami 2026</span>
+          <span class="text-xs sm:text-sm">GUMA Tools v1.5 &copy; Dami 2026</span>
           <div class="flex items-center gap-3">
             <a href="https://www.youtube.com/@DamiJJJ" target="_blank" rel="noopener noreferrer" aria-label="YouTube"
                class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-guma-gold text-guma-gold transition hover:-translate-y-0.5 hover:bg-guma-gold hover:text-guma-bg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-guma-gold">
