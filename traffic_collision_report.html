@@ -300,7 +300,7 @@
         <p class="guma-form-section w-full self-start">Preview</p>
         <canvas id="docCanvas" class="h-auto w-full max-w-[660px] border border-slate-700 bg-white shadow-canvas"></canvas>
         <div class="flex w-full max-w-[660px] flex-col gap-3 sm:flex-row">
-          <button type="button" class="guma-btn-primary flex-1" onclick="downloadPng()">
+          <button type="button" class="guma-btn-primary flex-1" id="downloadBtn" onclick="downloadPng()">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -319,6 +319,26 @@
             Download PNG
           </button>
         </div>
+        <div data-guma-counter hidden class="flex items-center justify-center gap-1.5 text-[11px] text-guma-muted/60 mt-0.5">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="11"
+            height="11"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <rect x="2" y="5" width="20" height="14" rx="2" />
+            <line x1="2" y1="10" x2="22" y2="10" />
+            <line x1="6" y1="15" x2="10" y2="15" />
+            <line x1="6" y1="18" x2="14" y2="18" />
+          </svg>
+          Generated <span id="downloadCount">0</span> times
+        </div>
       </div>
     </main>
 
@@ -327,6 +347,12 @@
     <script src="js/factions.js"></script>
     <script src="js/ui-helpers.js"></script>
     <script src="js/traffic-collision-report.js"></script>
+    <script src="js/counters.js"></script>
     <script src="js/components.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        window.GumaCounters?.initDownloadCounter("traffic", "downloadCount", "downloadBtn");
+      });
+    </script>
   </body>
 </html>

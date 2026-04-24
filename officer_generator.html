@@ -340,10 +340,31 @@
             Download PNG
           </button>
         </div>
+        <div data-guma-counter hidden class="flex items-center justify-center gap-1.5 text-[11px] text-guma-muted/60 mt-0.5">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="11"
+            height="11"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <rect x="2" y="5" width="20" height="14" rx="2" />
+            <line x1="2" y1="10" x2="22" y2="10" />
+            <line x1="6" y1="15" x2="10" y2="15" />
+            <line x1="6" y1="18" x2="14" y2="18" />
+          </svg>
+          Generated <span id="downloadCount">0</span> times
+        </div>
       </div>
     </main>
 
     <guma-footer></guma-footer>
+    <script src="js/counters.js"></script>
     <script src="js/components.js"></script>
     <script src="js/factions.js"></script>
     <script src="js/ui-helpers.js"></script>
@@ -354,6 +375,7 @@
           factionType: FACTION_TYPE.POLICE,
           defaultFaction: "lspd",
         });
+        window.GumaCounters?.initDownloadCounter("officer", "downloadCount", "downloadBtn");
       });
     </script>
   </body>
