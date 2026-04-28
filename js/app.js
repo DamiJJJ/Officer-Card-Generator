@@ -21,6 +21,7 @@ function switchFaction(key) {
   });
 
   populateSelects();
+  updateEmploymentRows();
   randomizePay();
 }
 
@@ -157,8 +158,13 @@ function randomizePay() {
 function generateCard() {
   const canvas = document.getElementById("cardCanvas");
   const ctx = canvas.getContext("2d");
-  const W = 840,
-    H = 680;
+  const W = 840;
+  const BASE_H = 680;
+
+  const empEntries = getEmploymentHistoryData();
+  const EMP_SECTION_H = empEntries && empEntries.length > 0 ? 24 + 32 + 24 + 34 + empEntries.length * 38 + 16 : 0;
+  const H = BASE_H + EMP_SECTION_H;
+
   canvas.width = W;
   canvas.height = H;
 
@@ -184,7 +190,7 @@ function generateCard() {
 
   const topOffset = 82;
   const photoW = 356,
-    photoH = H - topOffset - 24,
+    photoH = BASE_H - topOffset - 24,
     photoX = 24,
     photoY = topOffset;
   const rx = photoX + photoW + 20;
@@ -299,7 +305,7 @@ function generateCard() {
 
     // Misconduct button
     const mx = rx,
-      my = H - 64,
+      my = BASE_H - 64,
       mw = rw,
       mh = 44;
     ctx.fillStyle = "#d8d0b8";
@@ -313,6 +319,11 @@ function generateCard() {
     ctx.fillStyle = "#444";
     ctx.textAlign = "center";
     ctx.fillText("SEARCH MISCONDUCT RECORDS", mx + mw / 2, my + 28);
+
+    // Draw employment history below main card
+    if (empEntries && empEntries.length > 0) {
+      drawEmploymentHistory(ctx, W, BASE_H, empEntries, name, serial, badge);
+    }
 
     document.getElementById("downloadBtn").style.display = "block";
   }
@@ -380,6 +391,196 @@ function debounce(fn, delay = 300) {
     clearTimeout(timer);
     timer = setTimeout(() => fn(...args), delay);
   };
+}
+
+// ── Employment History ─────────────────────────────────────────────────────────
+
+function toggleEmploymentHistory() {
+  const section = document.getElementById("employmentHistorySection");
+  const checked = document.getElementById("attachEmploymentHistory").checked;
+  section.classList.toggle("hidden", !checked);
+  if (checked && document.querySelectorAll(".employment-row").length === 0) {
+    addEmploymentRow();
+  }
+  generateCard();
+}
+
+function addEmploymentRow() {
+  const container = document.getElementById("employmentRows");
+  const idx = container.children.length + 1;
+  const rankOptions = faction.ranks.map((r) => `<option value="${r}">${r}</option>`).join("");
+  const agencyName = faction ? faction.name : "";
+
+  const row = document.createElement("div");
+  row.className = "employment-row rounded-xl border border-guma-border-2 bg-guma-dark p-3";
+  row.innerHTML = `
+    <div class="mb-2 flex items-center justify-between">
+      <span class="text-[11px] font-bold uppercase tracking-wider text-guma-gold">Entry #${idx}</span>
+      <button type="button" onclick="removeEmploymentRow(this)" class="text-xs text-red-400 transition hover:text-red-300">✕ Remove</button>
+    </div>
+    <div class="mb-2 grid grid-cols-2 gap-2">
+      <div>
+        <label class="guma-label">From</label>
+        <input type="date" class="guma-input emp-from" oninput="generateCard()" />
+      </div>
+      <div>
+        <label class="guma-label">To <span class="font-normal normal-case">(empty = N/A)</span></label>
+        <input type="date" class="guma-input emp-to" oninput="generateCard()" />
+      </div>
+    </div>
+    <div class="mb-2">
+      <label class="guma-label">Change</label>
+      <input type="text" class="guma-input emp-change" placeholder="e.g. Promotion/Demotion (optional)" oninput="generateCard()" />
+    </div>
+    <div class="mb-2">
+      <label class="guma-label">Agency</label>
+      <input type="text" class="guma-input emp-agency" value="${agencyName}" oninput="generateCard()" />
+    </div>
+    <div>
+      <label class="guma-label">Rank</label>
+      <select class="guma-select emp-rank-select mb-1.5" onchange="generateCard()">${rankOptions}</select>
+      <input type="text" class="guma-input emp-rank-custom" placeholder="Custom rank (overrides dropdown)" oninput="generateCard()" />
+    </div>
+  `;
+  container.appendChild(row);
+  renumberEmploymentRows();
+  generateCard();
+}
+
+function updateEmploymentRows() {
+  const rows = document.querySelectorAll(".employment-row");
+  if (rows.length === 0) return;
+  const rankOptions = faction.ranks.map((r) => `<option value="${r}">${r}</option>`).join("");
+  const agencyName = faction ? faction.name : "";
+  rows.forEach((row) => {
+    row.querySelector(".emp-agency").value = agencyName;
+    row.querySelector(".emp-rank-select").innerHTML = rankOptions;
+  });
+  generateCard();
+}
+
+function removeEmploymentRow(btn) {
+  btn.closest(".employment-row").remove();
+  renumberEmploymentRows();
+  generateCard();
+}
+
+function renumberEmploymentRows() {
+  document.querySelectorAll(".employment-row").forEach((row, i) => {
+    row.querySelector("span").textContent = `Entry #${i + 1}`;
+  });
+}
+
+function getEmploymentHistoryData() {
+  const checkbox = document.getElementById("attachEmploymentHistory");
+  if (!checkbox || !checkbox.checked) return null;
+  const entries = [];
+  document.querySelectorAll(".employment-row").forEach((row) => {
+    const from = row.querySelector(".emp-from").value;
+    const to = row.querySelector(".emp-to").value;
+    const change = row.querySelector(".emp-change").value.trim();
+    const agency = row.querySelector(".emp-agency").value.trim();
+    const rankCustom = row.querySelector(".emp-rank-custom").value.trim();
+    const rankSelect = row.querySelector(".emp-rank-select");
+    const rank = rankCustom || (rankSelect ? rankSelect.value : "");
+    entries.push({ from, to, change, agency, rank });
+  });
+  return entries;
+}
+
+function drawEmploymentHistory(ctx, W, baseH, entries, cardName, cardSerial, cardBadge) {
+  const margin = 24;
+  const tableX = margin;
+  const tableW = W - margin * 2;
+  let y = baseH + 24;
+
+  // Separator line
+  ctx.strokeStyle = "#c8b97a";
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(margin, y - 8);
+  ctx.lineTo(W - margin, y - 8);
+  ctx.stroke();
+
+  // "EMPLOYMENT HISTORY" header
+  ctx.font = "bold 20px 'Courier New', monospace";
+  ctx.fillStyle = "#111";
+  ctx.textAlign = "left";
+  ctx.fillText("EMPLOYMENT HISTORY", tableX, y + 16);
+  y += 32;
+
+  // POST ID line
+  ctx.font = "bold 13px 'Courier New', monospace";
+  ctx.fillStyle = "#555";
+  const postA = String(cardSerial).replace(/\D/g, "").slice(-3).padStart(3, "0");
+  const postB = String(cardBadge).replace(/\D/g, "").slice(-3).padStart(3, "0");
+  ctx.fillText(`POST ID: ${postA}-${postB}   POST Name: ${cardName.toUpperCase()}`, tableX, y);
+  y += 24;
+
+  // Column definitions
+  const cols = [
+    { label: "From", w: 128 },
+    { label: "To", w: 128 },
+    { label: "Change", w: 148 },
+    { label: "Agency", w: 196 },
+    { label: "Rank", w: tableW - 128 - 128 - 148 - 196 },
+  ];
+
+  // Table header row
+  const headerH = 34;
+  ctx.fillStyle = "#ddd4b0";
+  ctx.strokeStyle = "#c8b97a";
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.roundRect(tableX, y, tableW, headerH, [4, 4, 0, 0]);
+  ctx.fill();
+  ctx.stroke();
+
+  ctx.font = "bold 13px 'Courier New', monospace";
+  ctx.fillStyle = "#333";
+  let cx = tableX + 8;
+  cols.forEach((col) => {
+    ctx.textAlign = "left";
+    ctx.fillText(col.label, cx, y + 22);
+    cx += col.w;
+  });
+  y += headerH;
+
+  // Data rows
+  const rowH = 38;
+  entries.forEach((entry, i) => {
+    const bg = i % 2 === 0 ? "#faf6ea" : "#f0ead4";
+    ctx.fillStyle = bg;
+    ctx.strokeStyle = "#d8cfa0";
+    ctx.lineWidth = 1;
+    ctx.fillRect(tableX, y, tableW, rowH);
+    ctx.strokeRect(tableX, y, tableW, rowH);
+
+    ctx.font = "14px 'Courier New', monospace";
+    ctx.fillStyle = "#111";
+    cx = tableX + 8;
+
+    const values = [entry.from || "", entry.to || "n/a", entry.change, entry.agency, entry.rank];
+
+    values.forEach((val, vi) => {
+      const maxW = cols[vi].w - 14;
+      let text = val;
+      ctx.font = "14px 'Courier New', monospace";
+      while (ctx.measureText(text).width > maxW && text.length > 1) {
+        text = text.slice(0, -1);
+      }
+      if (text !== val) text += "…";
+      ctx.textAlign = "left";
+      ctx.fillText(text, cx, y + 24);
+      cx += cols[vi].w;
+    });
+    y += rowH;
+  });
+
+  // Bottom border
+  ctx.strokeStyle = "#c8b97a";
+  ctx.lineWidth = 1;
+  ctx.strokeRect(tableX, baseH + 24 + 32 + 24 + headerH, tableW, entries.length * rowH);
 }
 
 // ── Init ──────────────────────────────────────────────────────────────────────

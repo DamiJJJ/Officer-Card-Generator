@@ -299,6 +299,19 @@
           <label class="guma-label" for="payRetirement">Retirement Pay</label>
           <input class="guma-input" type="text" id="payRetirement" placeholder="unknown" />
         </div>
+
+        <!-- ── Employment History ── -->
+        <div class="mt-6 border-t border-guma-border pt-5">
+          <label class="flex cursor-pointer select-none items-center gap-2.5">
+            <input type="checkbox" id="attachEmploymentHistory" onchange="toggleEmploymentHistory()" />
+            <span class="text-[11px] font-bold uppercase tracking-[0.16em] text-guma-gold">Attach Employment History</span>
+          </label>
+        </div>
+
+        <div id="employmentHistorySection" class="hidden mt-4 space-y-3">
+          <div id="employmentRows"></div>
+          <button type="button" class="guma-btn-outline mt-1" onclick="addEmploymentRow()">+ Add Row</button>
+        </div>
       </div>
 
       <div class="guma-panel flex flex-1 flex-col items-center gap-5 p-6">
