@@ -102,6 +102,18 @@ class GumaHeader extends HTMLElement {
           <!-- Right side -->
           <div class="flex items-center gap-3">
 
+            <!-- Live badge (Kick) -->
+            <a id="gumaLiveBadge"
+               href="https://kick.com/damulec" target="_blank" rel="noopener noreferrer"
+               class="hidden items-center gap-2 flex-shrink-0 rounded-xl px-3 py-2 text-sm font-bold tracking-wide no-underline transition-all duration-200 hover:-translate-y-px"
+               style="background: rgba(220,38,38,0.12); border: 1px solid rgba(220,38,38,0.45); color: #f87171;">
+              <span class="relative flex h-2.5 w-2.5">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+              </span>
+              LIVE ON
+            </a>
+
             <!-- Support button -->
             <a href="https://tipply.pl/@dami" target="_blank" rel="noopener noreferrer"
                class="hidden sm:inline-flex items-center gap-2 flex-shrink-0 rounded-xl px-4 py-2 text-sm font-black tracking-wide no-underline transition-all duration-200 hover:-translate-y-px hover:brightness-110"
@@ -209,6 +221,39 @@ class GumaHeader extends HTMLElement {
 
       </header>
     `;
+
+    // ── Live badge (Kick) ──────────────────────────────────────────
+    const showLiveBadge = () => {
+      const badge = document.getElementById("gumaLiveBadge");
+      if (!badge) return;
+      badge.classList.remove("hidden");
+      badge.classList.add("inline-flex");
+    };
+    const hideLiveBadge = () => {
+      const badge = document.getElementById("gumaLiveBadge");
+      if (!badge) return;
+      badge.classList.add("hidden");
+      badge.classList.remove("inline-flex");
+    };
+
+    const checkLiveStatus = async () => {
+      // Tryb podglądu: dodaj ?preview_live=1 do URL żeby zobaczyć plakietkę offline
+      if (new URLSearchParams(window.location.search).get("preview_live") === "1") {
+        showLiveBadge();
+        return;
+      }
+      try {
+        const res = await fetch("https://kick.com/api/v1/channels/damulec", { cache: "no-store" });
+        const data = await res.json();
+        data.livestream ? showLiveBadge() : hideLiveBadge();
+      } catch {
+        hideLiveBadge(); // CORS lub brak sieci — chowamy cicho
+      }
+    };
+
+    checkLiveStatus();
+    setInterval(checkLiveStatus, 60_000); // sprawdzaj co minutę
+    // ──────────────────────────────────────────────────────────────
 
     // ── Dropdown logic ──
     const setupDropdown = (btnId, menuId, chevronId) => {
