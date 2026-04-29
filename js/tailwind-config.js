@@ -1,0 +1,187 @@
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        "guma-bg":       "#04045e",
+        "guma-bg-soft":  "#0a0a72",
+        "guma-panel":    "#16213e",
+        "guma-panel-2":  "#1a2a4a",
+        "guma-input":    "#0f3460",
+        "guma-dark":     "#0f1e3d",
+        "guma-footer":   "#020338",
+        "guma-gold":     "#f0c040",
+        "guma-gold-dark":"#c8960c",
+        "guma-border":   "#2a2a4a",
+        "guma-border-2": "#2a2a5a",
+        "guma-text":     "#eeeeee",
+        "guma-muted":    "#aaaaaa",
+        "guma-success":  "#2f9e44",
+        "guma-soon":     "#6b7280",
+        "guma-danger":   "#7b0000",
+        "guma-danger-h": "#cc0000",
+      },
+      boxShadow: {
+        panel:  "0 12px 32px rgba(0,0,0,.28)",
+        glow:   "0 0 0 1px rgba(240,192,64,.15), 0 10px 30px rgba(0,0,0,.18)",
+        canvas: "0 4px 24px rgba(0,0,0,.5)",
+      },
+      maxWidth: {
+        "8xl": "1400px",
+      },
+      fontFamily: {
+        sans: ["Segoe UI", "Arial", "sans-serif"],
+      },
+      keyframes: {
+        "guma-fade-up": {
+          from: { opacity: "0", transform: "translateY(20px)" },
+          to:   { opacity: "1", transform: "translateY(0)" },
+        },
+        "guma-fade-in": {
+          from: { opacity: "0" },
+          to:   { opacity: "1" },
+        },
+        "guma-slide-in-left": {
+          from: { opacity: "0", transform: "translateX(-28px)" },
+          to:   { opacity: "1", transform: "translateX(0)" },
+        },
+        "guma-slide-in-right": {
+          from: { opacity: "0", transform: "translateX(28px)" },
+          to:   { opacity: "1", transform: "translateX(0)" },
+        },
+        "guma-header-drop": {
+          from: { opacity: "0", transform: "translateY(-100%)" },
+          to:   { opacity: "1", transform: "translateY(0)" },
+        },
+        "guma-mobile-open": {
+          from: { opacity: "0", transform: "translateY(-8px)", maxHeight: "0", overflow: "hidden" },
+          to:   { opacity: "1", transform: "translateY(0)",   MaxHeight: "600px", overflow: "hidden" },
+        },
+        "guma-slide-up-out": {
+          from: { opacity: "1", transform: "translateY(0)",   maxHeight: "600px" },
+          to:   { opacity: "0", transform: "translateY(-8px)", maxHeight: "0" },
+        },
+        "guma-dropdown-open": {
+          from: { opacity: "0", transform: "translateY(-6px) scaleY(0.96)" },
+          to:   { opacity: "1", transform: "translateY(0) scaleY(1)" },
+        },
+      },
+      animation: {
+        "guma-header-drop":   "guma-header-drop 0.45s cubic-bezier(0.22, 1, 0.36, 1) both",
+        "guma-fade-up":       "guma-fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both",
+        "guma-fade-in":       "guma-fade-in 0.4s ease both",
+        "guma-slide-in-left": "guma-slide-in-left 0.55s cubic-bezier(0.22, 1, 0.36, 1) both",
+        "guma-slide-in-right":"guma-slide-in-right 0.55s cubic-bezier(0.22, 1, 0.36, 1) both",
+        "guma-mobile-open":   "guma-mobile-open 0.3s cubic-bezier(0.22, 1, 0.36, 1) both",
+        "guma-slide-up-out":  "guma-slide-up-out 0.22s ease-in both",
+        "guma-dropdown-open": "guma-dropdown-open 0.2s cubic-bezier(0.22, 1, 0.36, 1) both",
+      },
+    },
+  },
+};
+
+// Wstrzykuje wspólne klasy animacji jako <style type="text/tailwindcss"> —
+// Tailwind CDN runtime odbierze je przez MutationObserver razem z blokami stron.
+(function () {
+  const style = document.createElement("style");
+  style.type = "text/tailwindcss";
+  style.textContent = `
+    @layer components {
+      .guma-anim-header-drop {
+        @apply animate-guma-header-drop;
+      }
+      .guma-page-title {
+        @apply animate-guma-fade-up;
+        animation-delay: 0.1s;
+      }
+      .guma-faction-switcher-wrap {
+        @apply animate-guma-fade-in;
+        animation-delay: 0.25s;
+      }
+      .guma-panel-form {
+        @apply animate-guma-slide-in-left;
+        animation-delay: 0.15s;
+      }
+      .guma-panel-preview {
+        @apply animate-guma-slide-in-right;
+        animation-delay: 0.25s;
+      }
+      .guma-reveal {
+        opacity: 0;
+        transform: translateY(18px);
+        transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .guma-reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .guma-tile-stagger {
+        opacity: 0;
+        @apply animate-guma-fade-up;
+        animation-play-state: paused;
+      }
+      .guma-tile-stagger.is-playing {
+        animation-play-state: running;
+      }
+      #gumaMobileMenu.is-open {
+        @apply animate-guma-mobile-open;
+      }
+      #gumaMobileMenu.is-closing {
+        @apply animate-guma-slide-up-out;
+      }
+      [id$="Menu"]:not(#gumaMobileMenu).is-open {
+        @apply animate-guma-dropdown-open;
+        transform-origin: top left;
+      }
+      .guma-card {
+        transition:
+          transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+          border-color 0.25s ease,
+          background-color 0.25s ease,
+          box-shadow 0.35s ease !important;
+      }
+      .guma-card:not(.guma-card-disabled):hover {
+        transform: translateY(-6px) !important;
+        box-shadow:
+          0 0 0 1px rgba(240, 192, 64, 0.3),
+          0 20px 48px rgba(0, 0, 0, 0.35),
+          0 0 32px rgba(240, 192, 64, 0.08) !important;
+      }
+      .guma-badge-wrap {
+        transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+                    box-shadow 0.2s ease;
+      }
+      .guma-card:not(.guma-card-disabled):hover .guma-badge-wrap {
+        transform: scale(1.08);
+        box-shadow: 0 0 0 2px rgba(240, 192, 64, 0.25), 0 6px 20px rgba(0, 0, 0, 0.3);
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .guma-anim-header-drop,
+      .guma-page-title,
+      .guma-faction-switcher-wrap,
+      .guma-panel-form,
+      .guma-panel-preview,
+      .guma-tile-stagger {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      .guma-reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+      .guma-card {
+        transition: border-color 0.15s ease, background-color 0.15s ease !important;
+      }
+      .guma-card:not(.guma-card-disabled):hover {
+        transform: none !important;
+      }
+      .guma-badge-wrap {
+        transition: none !important;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+})();

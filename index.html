@@ -11,41 +11,7 @@
     <link rel="manifest" href="manifest.json" />
 
     <script src="js/tailwind.js"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              "guma-bg": "#04045e",
-              "guma-bg-soft": "#0a0a72",
-              "guma-panel": "#16213e",
-              "guma-panel-2": "#1a2a4a",
-              "guma-input": "#0f3460",
-              "guma-dark": "#0f1e3d",
-              "guma-footer": "#020338",
-              "guma-gold": "#f0c040",
-              "guma-gold-dark": "#c8960c",
-              "guma-border": "#2a2a4a",
-              "guma-border-2": "#2a2a5a",
-              "guma-text": "#eeeeee",
-              "guma-muted": "#aaaaaa",
-              "guma-success": "#2f9e44",
-              "guma-soon": "#6b7280",
-            },
-            boxShadow: {
-              panel: "0 12px 32px rgba(0,0,0,.28)",
-              glow: "0 0 0 1px rgba(240,192,64,.15), 0 10px 30px rgba(0,0,0,.18)",
-            },
-            maxWidth: {
-              "8xl": "1400px",
-            },
-            fontFamily: {
-              sans: ["Segoe UI", "Arial", "sans-serif"],
-            },
-          },
-        },
-      };
-    </script>
+    <script src="js/tailwind-config.js"></script>
 
     <style type="text/tailwindcss">
       @layer base {
@@ -141,7 +107,7 @@
     <main class="flex-1">
       <section class="guma-page pt-10 pb-8 md:pt-16 md:pb-12">
         <div class="mx-auto max-w-4xl text-center">
-          <h1 class="text-4xl font-black uppercase tracking-[0.18em] text-guma-gold text-shadow-soft md:text-6xl">GUMA Tools</h1>
+          <h1 class="text-4xl font-black uppercase tracking-[0.18em] text-guma-gold text-shadow-soft md:text-6xl guma-page-title">GUMA Tools</h1>
 
           <!-- <p class="mx-auto mt-6 max-w-2xl text-sm leading-7 text-slate-200 md:text-base">
             Text
@@ -150,13 +116,13 @@
       </section>
 
       <section class="guma-page pb-10 md:pb-14">
-        <div class="mb-6 md:mb-8">
+        <div class="mb-6 md:mb-8 guma-reveal">
           <h2 class="guma-section-title">Card Generators</h2>
           <p class="guma-section-subtitle">Select card</p>
         </div>
 
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-          <a href="officer_generator.html" class="guma-card group">
+          <a href="officer_generator.html" class="guma-card group guma-tile-stagger">
             <div class="guma-badge-wrap">
               <img src="assets/policeman.png" alt="Officer generator icon" />
             </div>
@@ -169,7 +135,7 @@
             </div>
           </a>
 
-          <a href="firefighter_generator.html" class="guma-card group">
+          <a href="firefighter_generator.html" class="guma-card group guma-tile-stagger">
             <div class="guma-badge-wrap">
               <img src="assets/firefighter.png" alt="Firefighter generator icon" />
             </div>
@@ -182,7 +148,7 @@
             </div>
           </a>
 
-          <div class="guma-card guma-card-disabled group">
+          <div class="guma-card guma-card-disabled group guma-tile-stagger">
             <div class="guma-badge-wrap">
               <img src="assets/card_256.png" alt="Business card generator icon" />
             </div>
@@ -198,13 +164,13 @@
       </section>
 
       <section class="guma-page pb-14 md:pb-20">
-        <div class="mb-6 md:mb-8">
+        <div class="mb-6 md:mb-8 guma-reveal">
           <h2 class="guma-section-title">Report Generators</h2>
           <p class="guma-section-subtitle">Select your report</p>
         </div>
 
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-          <a href="firearm_discharge.html" class="guma-card group">
+          <a href="firearm_discharge.html" class="guma-card group guma-tile-stagger">
             <div class="guma-badge-wrap">
               <img src="assets/firearm_dis_192.png" alt="Firearm discharge report icon" />
             </div>
@@ -217,7 +183,7 @@
             </div>
           </a>
 
-          <a href="traffic_collision_report.html" class="guma-card group">
+          <a href="traffic_collision_report.html" class="guma-card group guma-tile-stagger">
             <div class="guma-badge-wrap">
               <img src="assets/traffic_col_192.png" alt="Traffic collision report icon" />
             </div>
@@ -230,7 +196,7 @@
             </div>
           </a>
 
-          <div class="guma-card guma-card-disabled group">
+          <div class="guma-card guma-card-disabled group guma-tile-stagger">
             <div class="guma-badge-wrap">
               <img src="assets/firearm_dis_192.png" alt="Prehospital care report icon" />
             </div>
@@ -243,7 +209,7 @@
             </div>
           </div>
 
-          <div class="guma-card guma-card-disabled group">
+          <div class="guma-card guma-card-disabled group guma-tile-stagger">
             <div class="guma-badge-wrap">
               <img src="assets/firearm_dis_192.png" alt="Fire Code Inspection Report icon" />
             </div>
@@ -256,7 +222,7 @@
             </div>
           </div>
 
-          <div class="guma-card guma-card-disabled group">
+          <div class="guma-card guma-card-disabled group guma-tile-stagger">
             <div class="guma-badge-wrap">
               <img src="assets/firearm_dis_192.png" alt="Coroner Autopsy Report icon" />
             </div>
@@ -275,5 +241,6 @@
     <guma-footer></guma-footer>
     <script src="js/counters.js"></script>
     <script src="js/components.js"></script>
+    <script src="js/animations.js"></script>
   </body>
 </html>

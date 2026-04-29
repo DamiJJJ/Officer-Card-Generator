@@ -18,7 +18,7 @@ class GumaHeader extends HTMLElement {
     const dropInactive = "text-guma-text";
 
     this.innerHTML = `
-      <header class="sticky top-0 z-30 border-b border-white/10 bg-[#04045e]/85 backdrop-blur-md">
+      <header class="sticky top-0 z-30 border-b border-white/10 bg-[#04045e]/85 backdrop-blur-md guma-anim-header-drop">
 
         <!-- ── Main bar ── -->
         <div class="mx-auto flex w-full max-w-[1400px] items-center justify-between gap-4 px-4 py-2.5 sm:px-6 lg:px-8">
@@ -271,6 +271,8 @@ class GumaHeader extends HTMLElement {
         this.querySelectorAll('[id$="Chevron"]').forEach((c) => (c.style.transform = ""));
         if (!isOpen) {
           menu.classList.remove("hidden");
+          menu.classList.add("is-open");
+          menu.addEventListener("animationend", () => menu.classList.remove("is-open"), { once: true });
           if (chevron) chevron.style.transform = "rotate(180deg)";
           btn.setAttribute("aria-expanded", "true");
         } else {
@@ -295,10 +297,24 @@ class GumaHeader extends HTMLElement {
 
     hamburger?.addEventListener("click", () => {
       const isOpen = !mobileMenu.classList.contains("hidden");
-      mobileMenu.classList.toggle("hidden");
-      hamburgerIcon.classList.toggle("hidden", !isOpen);
-      closeIcon.classList.toggle("hidden", isOpen);
-      hamburger.setAttribute("aria-expanded", String(!isOpen));
+      if (isOpen) {
+        mobileMenu.classList.remove("is-open");
+        mobileMenu.classList.add("is-closing");
+        hamburgerIcon.classList.remove("hidden");
+        closeIcon.classList.add("hidden");
+        hamburger.setAttribute("aria-expanded", "false");
+        setTimeout(() => {
+          mobileMenu.classList.remove("is-closing");
+          mobileMenu.classList.add("hidden");
+        }, 230);
+      } else {
+        mobileMenu.classList.remove("hidden");
+        mobileMenu.classList.remove("is-closing");
+        mobileMenu.classList.add("is-open");
+        hamburgerIcon.classList.add("hidden");
+        closeIcon.classList.remove("hidden");
+        hamburger.setAttribute("aria-expanded", "true");
+      }
     });
   }
 }
