@@ -62,6 +62,11 @@ class GumaHeader extends HTMLElement {
                   <img src="assets/firefighter.png" class="h-5 w-5 object-contain opacity-80" alt="" />
                   Firefighter Card Generator
                 </a>
+                <span class="flex items-center gap-2 px-4 py-3 text-sm border-t border-guma-border cursor-not-allowed select-none text-guma-muted/40">
+                  <img src="assets/card_256.png" class="h-5 w-5 object-contain opacity-30" alt="" />
+                  <span class="flex-1">Business Card Generator</span>
+                  <span class="ml-2 text-[10px] font-bold tracking-widest text-slate-600 uppercase shrink-0">(Soon)</span>
+                </span>
               </div>
             </div>
 
@@ -90,6 +95,49 @@ class GumaHeader extends HTMLElement {
                   <img src="assets/traffic_col_192.png" class="h-5 w-5 object-contain opacity-80" alt="" />
                   Traffic Collision Report
                 </a>
+                <span class="flex items-center gap-2 px-4 py-3 text-sm border-t border-guma-border cursor-not-allowed select-none text-guma-muted/40">
+                  <img src="assets/firearm_dis_192.png" class="h-5 w-5 object-contain opacity-30" alt="" />
+                  <span class="flex-1">Prehospital Care Report</span>
+                  <span class="ml-2 text-[10px] font-bold tracking-widest text-slate-600 uppercase shrink-0">(Soon)</span>
+                </span>
+                <span class="flex items-center gap-2 px-4 py-3 text-sm border-t border-guma-border cursor-not-allowed select-none text-guma-muted/40">
+                  <img src="assets/firearm_dis_192.png" class="h-5 w-5 object-contain opacity-30" alt="" />
+                  <span class="flex-1">Fire Code Inspection Report</span>
+                  <span class="ml-2 text-[10px] font-bold tracking-widest text-slate-600 uppercase shrink-0">(Soon)</span>
+                </span>
+                <span class="flex items-center gap-2 px-4 py-3 text-sm border-t border-guma-border cursor-not-allowed select-none text-guma-muted/40">
+                  <img src="assets/firearm_dis_192.png" class="h-5 w-5 object-contain opacity-30" alt="" />
+                  <span class="flex-1">Coroner Autopsy Report</span>
+                  <span class="ml-2 text-[10px] font-bold tracking-widest text-slate-600 uppercase shrink-0">(Soon)</span>
+                </span>
+              </div>
+            </div>
+
+             <!-- Poster Generators dropdown -->
+            <div class="relative" id="gumaPostersDropdown">
+              <button id="gumaPostersBtn"
+                class="flex items-center gap-1.5 ${navLinkBase} ${navInactive}"
+                aria-haspopup="true" aria-expanded="false">
+                Poster Generators
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2.5"
+                     stroke-linecap="round" stroke-linejoin="round"
+                     class="transition-transform duration-200" id="gumaPostersChevron">
+                  <polyline points="6 9 12 15 18 9"/>
+                </svg>
+              </button>
+              <div id="gumaPostersMenu"
+                   class="hidden absolute top-full left-0 mt-2 min-w-[260px] rounded-xl border border-guma-border bg-guma-panel shadow-panel overflow-hidden z-50">
+                <span class="flex items-center gap-2 px-4 py-3 text-sm cursor-not-allowed select-none text-guma-muted/40">
+                  <img src="assets/policeman.png" class="h-5 w-5 object-contain opacity-30" alt="" />
+                  <span class="flex-1">Police Recruitment Poster</span>
+                  <span class="ml-2 text-[10px] font-bold tracking-widest text-slate-600 uppercase shrink-0">(Soon)</span>
+                </span>
+                <span class="flex items-center gap-2 px-4 py-3 text-sm border-t border-guma-border cursor-not-allowed select-none text-guma-muted/40">
+                  <img src="assets/firefighter.png" class="h-5 w-5 object-contain opacity-30" alt="" />
+                  <span class="flex-1">Fire Dept. Recruitment Poster</span>
+                  <span class="ml-2 text-[10px] font-bold tracking-widest text-slate-600 uppercase shrink-0">(Soon)</span>
+                </span>
               </div>
             </div>
 
@@ -175,6 +223,11 @@ class GumaHeader extends HTMLElement {
               <img src="assets/firefighter.png" class="h-5 w-5 object-contain opacity-70" alt="" />
               Firefighter Card Generator
             </a>
+            <span class="flex items-center gap-2.5 px-4 py-2.5 rounded-lg text-sm cursor-not-allowed select-none text-guma-muted/40">
+              <img src="assets/card_256.png" class="h-5 w-5 object-contain opacity-40" alt="" />
+              <span class="flex-1">Business Card Generator</span>
+              <span class="text-[10px] font-bold tracking-widest text-slate-600 uppercase">(Soon)</span>
+            </span>
 
             <p class="px-3 pt-3 pb-1 text-[10px] font-bold uppercase tracking-[0.18em] text-guma-muted/50">
               Report Generators
@@ -191,6 +244,36 @@ class GumaHeader extends HTMLElement {
               <img src="assets/traffic_col_192.png" class="h-5 w-5 object-contain opacity-70" alt="" />
               Traffic Collision Report
             </a>
+            <span class="flex items-center gap-2.5 px-4 py-2.5 rounded-lg text-sm cursor-not-allowed select-none text-guma-muted/40">
+              <img src="assets/firearm_dis_192.png" class="h-5 w-5 object-contain opacity-40" alt="" />
+              <span class="flex-1">Prehospital Care Report</span>
+              <span class="text-[10px] font-bold tracking-widest text-slate-600 uppercase">(Soon)</span>
+            </span>
+            <span class="flex items-center gap-2.5 px-4 py-2.5 rounded-lg text-sm cursor-not-allowed select-none text-guma-muted/40">
+              <img src="assets/firearm_dis_192.png" class="h-5 w-5 object-contain opacity-40" alt="" />
+              <span class="flex-1">Fire Code Inspection Report</span>
+              <span class="text-[10px] font-bold tracking-widest text-slate-600 uppercase">(Soon)</span>
+            </span>
+            <span class="flex items-center gap-2.5 px-4 py-2.5 rounded-lg text-sm cursor-not-allowed select-none text-guma-muted/40">
+              <img src="assets/firearm_dis_192.png" class="h-5 w-5 object-contain opacity-40" alt="" />
+              <span class="flex-1">Coroner Autopsy Report</span>
+              <span class="text-[10px] font-bold tracking-widest text-slate-600 uppercase">(Soon)</span>
+            </span>
+
+            <!-- Poster Generators -->
+            <p class="px-3 pt-3 pb-1 text-[10px] font-bold uppercase tracking-[0.18em] text-guma-muted/50">
+              Poster Generators
+            </p>
+            <span class="flex items-center gap-2.5 px-4 py-2.5 rounded-lg text-sm cursor-not-allowed select-none text-guma-muted/40">
+              <img src="assets/policeman.png" class="h-5 w-5 object-contain opacity-40" alt="" />
+              <span class="flex-1">Police Recruitment Poster</span>
+              <span class="text-[10px] font-bold tracking-widest text-slate-600 uppercase">(Soon)</span>
+            </span>
+            <span class="flex items-center gap-2.5 px-4 py-2.5 rounded-lg text-sm cursor-not-allowed select-none text-guma-muted/40">
+              <img src="assets/firefighter.png" class="h-5 w-5 object-contain opacity-40" alt="" />
+              <span class="flex-1">Fire Dept. Recruitment Poster</span>
+              <span class="text-[10px] font-bold tracking-widest text-slate-600 uppercase">(Soon)</span>
+            </span>
 
             <!-- About (coming soon) mobile -->
             <p class="px-3 pt-3 pb-1 text-[10px] font-bold uppercase tracking-[0.18em] text-guma-muted/50">
@@ -283,6 +366,7 @@ class GumaHeader extends HTMLElement {
 
     setupDropdown("gumaCardsBtn", "gumaCardsMenu", "gumaCardsChevron");
     setupDropdown("gumaReportsBtn", "gumaReportsMenu", "gumaReportsChevron");
+    setupDropdown("gumaPostersBtn", "gumaPostersMenu", "gumaPostersChevron");
 
     document.addEventListener("click", () => {
       this.querySelectorAll('[id$="Menu"]:not(#gumaMobileMenu)').forEach((m) => m.classList.add("hidden"));

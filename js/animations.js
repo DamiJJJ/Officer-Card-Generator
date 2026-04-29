@@ -1,7 +1,6 @@
 "use strict";
 
 (function () {
-
   function initScrollReveal() {
     const targets = document.querySelectorAll(".guma-reveal");
     if (!targets.length) return;
@@ -15,7 +14,7 @@
           }
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
     );
 
     targets.forEach((el) => observer.observe(el));
@@ -25,10 +24,17 @@
     const tiles = document.querySelectorAll(".guma-tile-stagger");
     if (!tiles.length) return;
 
+    tiles.forEach((tile) => {
+      tile.style.opacity = "0";
+    });
+
     requestAnimationFrame(() => {
       tiles.forEach((tile, i) => {
         tile.style.animationDelay = `${i * 80}ms`;
-        requestAnimationFrame(() => tile.classList.add("is-playing"));
+        requestAnimationFrame(() => {
+          tile.style.opacity = "";
+          tile.classList.add("is-playing");
+        });
       });
     });
   }
@@ -43,5 +49,4 @@
   } else {
     init();
   }
-
 })();
