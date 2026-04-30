@@ -467,7 +467,7 @@ function addEmploymentRow() {
       <input type="text" class="guma-input emp-rank-custom" placeholder="Custom rank (overrides dropdown)" oninput="generateCard()" />
     </div>
   `;
-  container.appendChild(row);
+  container.insertBefore(row, container.firstChild);
   renumberEmploymentRows();
   generateCard();
 }
@@ -585,7 +585,7 @@ function drawEmploymentHistory(ctx, W, baseH, entries, cardName, cardSerial, car
     ctx.fillStyle = "#111";
     cx = tableX + 8;
 
-    const values = [entry.from || "", entry.to || "n/a", entry.change, entry.agency, entry.rank];
+    const values = [entry.from || "-", entry.to || "-", entry.change || "-", entry.agency || "-", entry.rank || "-"];
 
     values.forEach((val, vi) => {
       const maxW = cols[vi].w - 14;
