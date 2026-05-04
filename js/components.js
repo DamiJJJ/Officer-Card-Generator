@@ -1,4 +1,4 @@
-const GUMA_VERSION = "1.5";
+const GUMA_VERSION = "1.6";
 
 // HEADER
 class GumaHeader extends HTMLElement {
