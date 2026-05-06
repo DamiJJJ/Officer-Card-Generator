@@ -5,7 +5,7 @@ class GumaHeader extends HTMLElement {
   connectedCallback() {
     const current = window.location.pathname.split("/").pop() || "index.html";
 
-    const isCard = ["officer_generator.html", "firefighter_generator.html"].includes(current);
+    const isCard = ["officer_generator.html", "firefighter_generator.html", "business_card_generator.html"].includes(current);
     const isReport = ["firearm_discharge.html", "traffic_collision_report.html"].includes(current);
     const isHome = current === "index.html" || current === "";
 
@@ -62,11 +62,11 @@ class GumaHeader extends HTMLElement {
                   <img src="assets/firefighter.png" class="h-5 w-5 object-contain opacity-80" alt="" />
                   Firefighter Card Generator
                 </a>
-                <span class="flex items-center gap-2 px-4 py-3 text-sm border-t border-guma-border cursor-not-allowed select-none text-guma-muted/40">
-                  <img src="assets/card_256.png" class="h-5 w-5 object-contain opacity-30" alt="" />
-                  <span class="flex-1">Business Card Generator</span>
-                  <span class="ml-2 text-[10px] font-bold tracking-widest text-slate-600 uppercase shrink-0">(Soon)</span>
-                </span>
+                <a href="business_card_generator.html"
+                   class="${dropLinkBase} border-t border-guma-border ${current === "business_card_generator.html" ? dropActive : dropInactive}">
+                  <img src="assets/card_256.png" class="h-5 w-5 object-contain opacity-80" alt="" />
+                  Business Card Generator
+                </a>
               </div>
             </div>
 
@@ -223,11 +223,12 @@ class GumaHeader extends HTMLElement {
               <img src="assets/firefighter.png" class="h-5 w-5 object-contain opacity-70" alt="" />
               Firefighter Card Generator
             </a>
-            <span class="flex items-center gap-2.5 px-4 py-2.5 rounded-lg text-sm cursor-not-allowed select-none text-guma-muted/40">
-              <img src="assets/card_256.png" class="h-5 w-5 object-contain opacity-40" alt="" />
-              <span class="flex-1">Business Card Generator</span>
-              <span class="text-[10px] font-bold tracking-widest text-slate-600 uppercase">(Soon)</span>
-            </span>
+            <a href="business_card_generator.html"
+               class="flex items-center gap-2.5 px-4 py-2.5 rounded-lg text-sm transition
+                      ${current === "business_card_generator.html" ? "text-guma-gold bg-guma-gold/10" : "text-guma-muted hover:text-guma-text hover:bg-white/5"}">
+              <img src="assets/card_256.png" class="h-5 w-5 object-contain opacity-70" alt="" />
+              Business Card Generator
+            </a>
 
             <p class="px-3 pt-3 pb-1 text-[10px] font-bold uppercase tracking-[0.18em] text-guma-muted/50">
               Report Generators
