@@ -184,7 +184,7 @@ function bcLoadImage(src) {
   });
 }
 
-function bcFitFontToWidth(ctx, text, maxW, baseSize, weight = "bold", family = "Georgia, 'Times New Roman', serif") {
+function bcFitFontToWidth(ctx, text, maxW, baseSize, weight = "bold", family = "'Times New Roman', Times, serif") {
   let size = baseSize;
   ctx.font = `${weight} ${size}px ${family}`;
   while (ctx.measureText(text).width > maxW && size > 10) {
@@ -287,7 +287,7 @@ async function bcRender() {
   // Address
   ctx.textAlign = "left";
   ctx.textBaseline = "alphabetic";
-  ctx.font = "14px Georgia, 'Times New Roman', serif";
+  ctx.font = "14px 'Times New Roman', Times, serif";
   ctx.fillStyle = "#0a0a0a";
   const addrLines = [address1, address2].filter(Boolean);
   const addrLineH = 19;
@@ -312,12 +312,12 @@ async function bcRender() {
     cY += 32;
   }
   if (fullName) {
-    ctx.font = "italic 17px Georgia, 'Times New Roman', serif";
+    ctx.font = "italic 17px 'Times New Roman', Times, serif";
     ctx.fillText(fullName, centerX, cY);
     cY += 26;
   }
   if (!isCustom) {
-    ctx.font = "18px Georgia, 'Times New Roman', serif";
+    ctx.font = "18px 'Times New Roman', Times, serif";
     ctx.fillText("Serial No. " + (badgeNo || ""), centerX, cY);
   }
 
@@ -368,7 +368,7 @@ async function bcRender() {
 
   ctx.textAlign = "right";
   ctx.textBaseline = "alphabetic";
-  ctx.font = "14px Georgia, 'Times New Roman', serif";
+  ctx.font = "14px 'Times New Roman', Times, serif";
   ctx.fillStyle = "#0a0a0a";
 
   const contactLineH = 19;
@@ -382,7 +382,7 @@ async function bcRender() {
   ctx.textAlign = "center";
   ctx.textBaseline = "alphabetic";
   ctx.fillStyle = "#1a1a1a";
-  ctx.font = "10px Georgia, 'Times New Roman', serif";
+  ctx.font = "10px 'Times New Roman', Times, serif";
 
   let footerText = "";
   if (isCustom) {
@@ -394,7 +394,7 @@ async function bcRender() {
     footerText = `Join the ${bc.recruitName}    ${bc.recruitPhone} Recruitment Hotline    ${bc.websiteMain}    ${bc.websiteJoin}`;
   }
   if (footerText) {
-    bcFitFontToWidth(ctx, footerText, W - 50, 10, "normal");
+    bcFitFontToWidth(ctx, footerText, W - 50, 10, "normal", "'Times New Roman', Times, serif");
     ctx.fillText(footerText, W / 2, H - 14);
   }
 }

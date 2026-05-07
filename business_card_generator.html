@@ -88,6 +88,11 @@
           border-color: #2a2a5a;
         }
       }
+
+      /* Checkbox accent */
+      input[type="checkbox"] {
+        accent-color: #f0c040;
+      }
     </style>
   </head>
 
@@ -145,9 +150,9 @@
 
         <!-- Watermark toggle -->
         <div class="mb-5">
-          <label class="flex items-center gap-2.5 cursor-pointer select-none">
-            <input type="checkbox" id="bcWatermark" class="h-4 w-4 cursor-pointer accent-guma-gold" onchange="bcRender()" />
-            <span class="text-sm font-medium text-white">Watermark</span>
+          <label class="flex cursor-pointer select-none items-center gap-2.5">
+            <input type="checkbox" id="bcWatermark" onchange="bcRender()" />
+            <span class="text-[11px] font-bold uppercase tracking-[0.16em] text-guma-gold">Enable Watermark</span>
           </label>
         </div>
 
