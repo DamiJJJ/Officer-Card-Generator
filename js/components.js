@@ -25,8 +25,8 @@ class GumaHeader extends HTMLElement {
 
           <!-- Logo w jasnym tle -->
           <a href="index.html"
-             class="flex-shrink-0 flex items-center rounded-xl bg-white px-3 py-1.5 shadow-md transition hover:bg-white/90 hover:-translate-y-px">
-            <img src="assets/logo.png" alt="GUMA Tools" class="h-8 w-auto" />
+             class="flex-shrink-0 flex items-center rounded-xl px-3 py-1.5 transition hover:-translate-y-px">
+            <img src="assets/logo_dark.png" alt="GUMA Tools" class="h-8 w-auto" />
           </a>
 
           <!-- Desktop nav -->
