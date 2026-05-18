@@ -1,7 +1,9 @@
 tailwind.config = {
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
+        // ── DARK THEME (jak obecnie) ──
         "guma-bg": "#04045e",
         "guma-bg-soft": "#0a0a72",
         "guma-panel": "#16213e",
@@ -19,11 +21,30 @@ tailwind.config = {
         "guma-soon": "#6b7280",
         "guma-danger": "#7b0000",
         "guma-danger-h": "#cc0000",
+
+        // ── LIGHT THEME (kremowy + granat + złoto) ──
+        "guma-l-bg": "#f7f5ee",
+        "guma-l-bg-soft": "#fefcf5",
+        "guma-l-panel": "#ffffff",
+        "guma-l-panel-2": "#fbf8ee",
+        "guma-l-input": "#f3efe2",
+        "guma-l-dark": "#ece6d4",
+        "guma-l-footer": "#efe9d8",
+        "guma-l-gold": "#b8860b",
+        "guma-l-gold-soft": "#d4a418",
+        "guma-l-border": "#e2dcc8",
+        "guma-l-border-2": "#d4cdb4",
+        "guma-l-text": "#1a1a2e",
+        "guma-l-muted": "#6b6757",
       },
       boxShadow: {
         panel: "0 12px 32px rgba(0,0,0,.28)",
         glow: "0 0 0 1px rgba(240,192,64,.15), 0 10px 30px rgba(0,0,0,.18)",
         canvas: "0 4px 24px rgba(0,0,0,.5)",
+        // ── light variants ──
+        "panel-light": "0 8px 24px rgba(20,20,40,.06), 0 2px 6px rgba(20,20,40,.04)",
+        "glow-light": "0 0 0 1px rgba(184,134,11,.20), 0 12px 30px rgba(20,20,40,.06)",
+        "canvas-light": "0 4px 18px rgba(20,20,40,.08)",
       },
       maxWidth: {
         "8xl": "1400px",
@@ -138,7 +159,7 @@ tailwind.config = {
         @apply animate-guma-dropdown-open;
         transform-origin: top left;
       }
-      .guma-card {
+            .guma-card {
         transition:
           transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
           border-color 0.25s ease,
@@ -147,6 +168,14 @@ tailwind.config = {
       }
       .guma-card:not(.guma-card-disabled):hover {
         transform: translateY(-6px) !important;
+      }
+      html:not(.dark) .guma-card:not(.guma-card-disabled):hover {
+        box-shadow:
+          0 0 0 1px rgba(184, 134, 11, 0.25),
+          0 18px 40px rgba(20, 20, 40, 0.08),
+          0 0 28px rgba(184, 134, 11, 0.06) !important;
+      }
+      html.dark .guma-card:not(.guma-card-disabled):hover {
         box-shadow:
           0 0 0 1px rgba(240, 192, 64, 0.3),
           0 20px 48px rgba(0, 0, 0, 0.35),
@@ -155,20 +184,11 @@ tailwind.config = {
       .guma-card-disabled {
         filter: grayscale(0.5) brightness(0.72);
       }
+      html:not(.dark) .guma-card-disabled {
+        filter: grayscale(0.4) brightness(0.96) !important;
+      }
       .guma-tile-stagger.guma-card-disabled {
         @apply animate-guma-fade-up-dim;
-      }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .guma-anim-header-drop,
-      .guma-page-title,
-      .guma-faction-switcher-wrap,
-      .guma-panel-form,
-      .guma-panel-preview,
-      .guma-tile-stagger {
-        animation: none !important;
-        opacity: 1 !important;
-        transform: none !important;
       }
       .guma-reveal {
         opacity: 1 !important;
