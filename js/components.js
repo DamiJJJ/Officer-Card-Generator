@@ -28,7 +28,7 @@ class GumaHeader extends HTMLElement {
         <!-- ── Main bar ── -->
         <div class="mx-auto flex w-full max-w-[1400px] items-center justify-between gap-4 px-4 py-2.5 sm:px-6 lg:px-8">
 
-          <!-- Logo (dwa warianty, CSS toggluje widoczność) -->
+          <!-- Logo -->
           <a href="index.html"
              class="flex-shrink-0 flex items-center rounded-xl px-3 py-1.5 transition hover:-translate-y-px">
             <img src="assets/logo.png" alt="GUMA Tools" class="h-8 w-auto block dark:hidden" />
@@ -202,18 +202,11 @@ class GumaHeader extends HTMLElement {
                      border-guma-l-border text-guma-l-muted hover:border-guma-l-gold hover:text-guma-l-gold
                      dark:border-guma-border dark:text-guma-muted dark:hover:border-guma-gold dark:hover:text-guma-gold"
               aria-label="Toggle theme">
-              <!-- Moon (widoczny w light) -->
+              <!-- Sun -->
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
                    fill="none" stroke="currentColor" stroke-width="2"
                    stroke-linecap="round" stroke-linejoin="round"
                    class="block dark:hidden">
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-              </svg>
-              <!-- Sun (widoczne w dark) -->
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                   fill="none" stroke="currentColor" stroke-width="2"
-                   stroke-linecap="round" stroke-linejoin="round"
-                   class="hidden dark:block">
                 <circle cx="12" cy="12" r="4"/>
                 <line x1="12" y1="2" x2="12" y2="4"/>
                 <line x1="12" y1="20" x2="12" y2="22"/>
@@ -223,6 +216,13 @@ class GumaHeader extends HTMLElement {
                 <line x1="20" y1="12" x2="22" y2="12"/>
                 <line x1="4.93" y1="19.07" x2="6.34" y2="17.66"/>
                 <line x1="17.66" y1="6.34" x2="19.07" y2="4.93"/>
+              </svg>
+              <!-- Moon -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2"
+                   stroke-linecap="round" stroke-linejoin="round"
+                   class="hidden dark:block">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
               </svg>
             </button>
 
