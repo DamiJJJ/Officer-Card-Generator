@@ -11,10 +11,10 @@
 
       body {
         @apply min-h-full font-sans antialiased text-guma-l-text dark:text-guma-text;
-        background-color: #f7f5ee;
+        background-color: #eef2f9;
         background-image:
-          radial-gradient(circle at top, rgba(184, 134, 11, 0.07), transparent 28%),
-          linear-gradient(180deg, #fefcf5 0%, #f7f5ee 40%, #efe9d8 100%);
+          radial-gradient(circle at top, rgba(45, 71, 135, 0.06), transparent 28%),
+          linear-gradient(180deg, #f8fafd 0%, #eef2f9 40%, #dde4f0 100%);
         background-attachment: fixed;
       }
 
@@ -43,8 +43,8 @@
       }
 
       ::selection {
-        background: rgba(184, 134, 11, 0.3);
-        color: #1a1a2e;
+        background: rgba(45, 71, 135, 0.25);
+        color: #ffffff;
       }
       html.dark ::selection {
         background: rgba(240, 192, 64, 0.35);
@@ -65,7 +65,7 @@
 
       /* Checkbox accent + size */
       input[type="checkbox"] {
-        accent-color: #b8860b;
+        accent-color: #2d4787;
         width: 14px;
         height: 14px;
         cursor: pointer;

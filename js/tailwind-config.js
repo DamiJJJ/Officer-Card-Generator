@@ -3,7 +3,7 @@ tailwind.config = {
   theme: {
     extend: {
       colors: {
-        // ── DARK THEME (jak obecnie) ──
+        // ── DARK THEME ──
         "guma-bg": "#04045e",
         "guma-bg-soft": "#0a0a72",
         "guma-panel": "#16213e",
@@ -22,20 +22,20 @@ tailwind.config = {
         "guma-danger": "#7b0000",
         "guma-danger-h": "#cc0000",
 
-        // ── LIGHT THEME (kremowy + granat + złoto) ──
-        "guma-l-bg": "#f7f5ee",
-        "guma-l-bg-soft": "#fefcf5",
+        // ── LIGHT THEME ──
+        "guma-l-bg": "#eef2f9",
+        "guma-l-bg-soft": "#f8fafd",
         "guma-l-panel": "#ffffff",
-        "guma-l-panel-2": "#fbf8ee",
-        "guma-l-input": "#f3efe2",
-        "guma-l-dark": "#ece6d4",
-        "guma-l-footer": "#efe9d8",
-        "guma-l-gold": "#b8860b",
-        "guma-l-gold-soft": "#d4a418",
-        "guma-l-border": "#e2dcc8",
-        "guma-l-border-2": "#d4cdb4",
-        "guma-l-text": "#1a1a2e",
-        "guma-l-muted": "#6b6757",
+        "guma-l-panel-2": "#e8eef9",
+        "guma-l-input": "#e3eaf5",
+        "guma-l-dark": "#d6e0ed",
+        "guma-l-footer": "#dde4f0",
+        "guma-l-gold": "#2d4787",
+        "guma-l-gold-soft": "#5d7ab0",
+        "guma-l-border": "#d4dceb",
+        "guma-l-border-2": "#bfc9dd",
+        "guma-l-text": "#0f0f3a",
+        "guma-l-muted": "#5a5e7a",
       },
       boxShadow: {
         panel: "0 12px 32px rgba(0,0,0,.28)",
@@ -43,7 +43,7 @@ tailwind.config = {
         canvas: "0 4px 24px rgba(0,0,0,.5)",
         // ── light variants ──
         "panel-light": "0 8px 24px rgba(20,20,40,.06), 0 2px 6px rgba(20,20,40,.04)",
-        "glow-light": "0 0 0 1px rgba(184,134,11,.20), 0 12px 30px rgba(20,20,40,.06)",
+        "glow-light": "0 0 0 1px rgba(45,71,135,.20), 0 12px 30px rgba(20,20,40,.06)",
         "canvas-light": "0 4px 18px rgba(20,20,40,.08)",
       },
       maxWidth: {
@@ -171,9 +171,9 @@ tailwind.config = {
       }
       html:not(.dark) .guma-card:not(.guma-card-disabled):hover {
         box-shadow:
-          0 0 0 1px rgba(184, 134, 11, 0.25),
+          0 0 0 1px rgba(45, 71, 135, 0.25),
           0 18px 40px rgba(20, 20, 40, 0.08),
-          0 0 28px rgba(184, 134, 11, 0.06) !important;
+          0 0 28px rgba(45, 71, 135, 0.08) !important;
       }
       html.dark .guma-card:not(.guma-card-disabled):hover {
         box-shadow:
