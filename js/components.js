@@ -97,32 +97,32 @@ class GumaHeader extends HTMLElement {
                           dark:border-guma-border dark:bg-guma-panel dark:shadow-panel">
                 <a href="firearm_discharge.html"
                    class="${dropLinkBase} ${current === "firearm_discharge.html" ? dropActive : dropInactive}">
-                  <img src="assets/firearm_dis_192.png" class="h-5 w-5 object-contain opacity-80" alt="" />
+                  <img src="assets/shooting.png" class="h-5 w-5 object-contain opacity-80" alt="" />
                   Firearm Discharge Report
                 </a>
                 <a href="traffic_collision_report.html"
                    class="${dropLinkBase} border-t border-guma-l-border dark:border-guma-border ${current === "traffic_collision_report.html" ? dropActive : dropInactive}">
-                  <img src="assets/traffic_col_192.png" class="h-5 w-5 object-contain opacity-80" alt="" />
+                  <img src="assets/collision.png" class="h-5 w-5 object-contain opacity-80" alt="" />
                   Traffic Collision Report
                 </a>
                 <span class="flex items-center gap-2 px-4 py-3 text-sm border-t cursor-not-allowed select-none
                              border-guma-l-border text-guma-l-muted/50
                              dark:border-guma-border dark:text-guma-muted/40">
-                  <img src="assets/firearm_dis_192.png" class="h-5 w-5 object-contain opacity-30" alt="" />
+                  <img src="assets/placeholder.png" class="h-5 w-5 object-contain opacity-30" alt="" />
                   <span class="flex-1">Prehospital Care Report</span>
                   <span class="ml-2 text-[10px] font-bold tracking-widest uppercase shrink-0 text-slate-400 dark:text-slate-600">(Soon)</span>
                 </span>
                 <span class="flex items-center gap-2 px-4 py-3 text-sm border-t cursor-not-allowed select-none
                              border-guma-l-border text-guma-l-muted/50
                              dark:border-guma-border dark:text-guma-muted/40">
-                  <img src="assets/firearm_dis_192.png" class="h-5 w-5 object-contain opacity-30" alt="" />
+                  <img src="assets/placeholder.png" class="h-5 w-5 object-contain opacity-30" alt="" />
                   <span class="flex-1">Fire Code Inspection Report</span>
                   <span class="ml-2 text-[10px] font-bold tracking-widest uppercase shrink-0 text-slate-400 dark:text-slate-600">(Soon)</span>
                 </span>
                 <span class="flex items-center gap-2 px-4 py-3 text-sm border-t cursor-not-allowed select-none
                              border-guma-l-border text-guma-l-muted/50
                              dark:border-guma-border dark:text-guma-muted/40">
-                  <img src="assets/firearm_dis_192.png" class="h-5 w-5 object-contain opacity-30" alt="" />
+                  <img src="assets/placeholder.png" class="h-5 w-5 object-contain opacity-30" alt="" />
                   <span class="flex-1">Coroner Autopsy Report</span>
                   <span class="ml-2 text-[10px] font-bold tracking-widest uppercase shrink-0 text-slate-400 dark:text-slate-600">(Soon)</span>
                 </span>
@@ -291,27 +291,27 @@ class GumaHeader extends HTMLElement {
             <a href="firearm_discharge.html"
                class="flex items-center gap-2.5 px-4 py-2.5 rounded-lg text-sm transition
                       ${current === "firearm_discharge.html" ? mobActive : mobInactive}">
-              <img src="assets/firearm_dis_192.png" class="h-5 w-5 object-contain opacity-70" alt="" />
+              <img src="assets/shooting.png" class="h-5 w-5 object-contain opacity-70" alt="" />
               Firearm Discharge Report
             </a>
             <a href="traffic_collision_report.html"
                class="flex items-center gap-2.5 px-4 py-2.5 rounded-lg text-sm transition
                       ${current === "traffic_collision_report.html" ? mobActive : mobInactive}">
-              <img src="assets/traffic_col_192.png" class="h-5 w-5 object-contain opacity-70" alt="" />
+              <img src="assets/collision.png" class="h-5 w-5 object-contain opacity-70" alt="" />
               Traffic Collision Report
             </a>
             <span class="flex items-center gap-2.5 px-4 py-2.5 rounded-lg text-sm cursor-not-allowed select-none text-guma-l-muted/50 dark:text-guma-muted/40">
-              <img src="assets/firearm_dis_192.png" class="h-5 w-5 object-contain opacity-40" alt="" />
+              <img src="assets/placeholder.png" class="h-5 w-5 object-contain opacity-40" alt="" />
               <span class="flex-1">Prehospital Care Report</span>
               <span class="text-[10px] font-bold tracking-widest uppercase text-slate-400 dark:text-slate-600">(Soon)</span>
             </span>
             <span class="flex items-center gap-2.5 px-4 py-2.5 rounded-lg text-sm cursor-not-allowed select-none text-guma-l-muted/50 dark:text-guma-muted/40">
-              <img src="assets/firearm_dis_192.png" class="h-5 w-5 object-contain opacity-40" alt="" />
+              <img src="assets/placeholder.png" class="h-5 w-5 object-contain opacity-40" alt="" />
               <span class="flex-1">Fire Code Inspection Report</span>
               <span class="text-[10px] font-bold tracking-widest uppercase text-slate-400 dark:text-slate-600">(Soon)</span>
             </span>
             <span class="flex items-center gap-2.5 px-4 py-2.5 rounded-lg text-sm cursor-not-allowed select-none text-guma-l-muted/50 dark:text-guma-muted/40">
-              <img src="assets/firearm_dis_192.png" class="h-5 w-5 object-contain opacity-40" alt="" />
+              <img src="assets/placeholder.png" class="h-5 w-5 object-contain opacity-40" alt="" />
               <span class="flex-1">Coroner Autopsy Report</span>
               <span class="text-[10px] font-bold tracking-widest uppercase text-slate-400 dark:text-slate-600">(Soon)</span>
             </span>
