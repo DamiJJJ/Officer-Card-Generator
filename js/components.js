@@ -198,32 +198,37 @@ class GumaHeader extends HTMLElement {
 
             <!-- Theme toggle -->
             <button id="gumaThemeToggle"
-              class="inline-flex items-center justify-center h-9 w-9 rounded-lg border transition
-                     border-guma-l-border text-guma-l-muted hover:border-guma-l-gold hover:text-guma-l-gold
-                     dark:border-guma-border dark:text-guma-muted dark:hover:border-guma-gold dark:hover:text-guma-gold"
-              aria-label="Toggle theme">
-              <!-- Sun -->
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                   fill="none" stroke="currentColor" stroke-width="2"
-                   stroke-linecap="round" stroke-linejoin="round"
-                   class="block dark:hidden">
-                <circle cx="12" cy="12" r="4"/>
-                <line x1="12" y1="2" x2="12" y2="4"/>
-                <line x1="12" y1="20" x2="12" y2="22"/>
-                <line x1="4.93" y1="4.93" x2="6.34" y2="6.34"/>
-                <line x1="17.66" y1="17.66" x2="19.07" y2="19.07"/>
-                <line x1="2" y1="12" x2="4" y2="12"/>
-                <line x1="20" y1="12" x2="22" y2="12"/>
-                <line x1="4.93" y1="19.07" x2="6.34" y2="17.66"/>
-                <line x1="17.66" y1="6.34" x2="19.07" y2="4.93"/>
-              </svg>
-              <!-- Moon -->
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                   fill="none" stroke="currentColor" stroke-width="2"
-                   stroke-linecap="round" stroke-linejoin="round"
-                   class="hidden dark:block">
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-              </svg>
+              aria-label="Toggle theme"
+              class="relative inline-flex items-center h-8 w-14 rounded-full border transition-colors duration-300 cursor-pointer shrink-0
+                     border-guma-l-border bg-guma-l-panel-2
+                     dark:border-guma-border dark:bg-guma-panel-2">
+              <!-- Knob -->
+              <span class="absolute left-1 flex items-center justify-center w-6 h-6 rounded-full shadow-sm transition-transform duration-300
+                           bg-white
+                           dark:translate-x-6 dark:bg-guma-gold">
+                <!-- Sun (light mode) -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2.5"
+                     stroke-linecap="round" stroke-linejoin="round"
+                     class="block dark:hidden text-guma-l-gold">
+                  <circle cx="12" cy="12" r="4"/>
+                  <line x1="12" y1="2" x2="12" y2="4"/>
+                  <line x1="12" y1="20" x2="12" y2="22"/>
+                  <line x1="4.93" y1="4.93" x2="6.34" y2="6.34"/>
+                  <line x1="17.66" y1="17.66" x2="19.07" y2="19.07"/>
+                  <line x1="2" y1="12" x2="4" y2="12"/>
+                  <line x1="20" y1="12" x2="22" y2="12"/>
+                  <line x1="4.93" y1="19.07" x2="6.34" y2="17.66"/>
+                  <line x1="17.66" y1="6.34" x2="19.07" y2="4.93"/>
+                </svg>
+                <!-- Moon (dark mode) -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2.5"
+                     stroke-linecap="round" stroke-linejoin="round"
+                     class="hidden dark:block text-guma-bg">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+              </span>
             </button>
 
             <!-- Hamburger (mobile only) -->
